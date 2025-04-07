@@ -1,4 +1,4 @@
-import GameEntity from "../../engine/objects/GameEntity.js";
+import GameEntity from "GameEntity.js";
 import * as f from "../../functions.js";
 
 // TOOD rename
