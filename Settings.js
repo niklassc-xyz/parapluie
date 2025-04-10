@@ -5,7 +5,6 @@ export default class Settings {
 	static experimental = true;
 	static scaling = true;
 	static paused = false;
-	static fullscreen = false; // TODO check / remove
 	static mute = false;
 
 	/**
