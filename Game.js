@@ -135,7 +135,7 @@ export default class Game {
 	// @return {(PhysicalEntity|undefined)} of type cls or undefined
 	collision_point(x, y, cls) { // return obj oder undefined
 		/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
-			* Nur unpräzise Prüfung (point_in_rectangle).
+			* Nur unpräzise Prüfung (pointInRectangle).
 			*/
 			for(var i = 0; i < this.room.objects.length; i++) {
 				var obj = this.room.objects[i];
@@ -144,7 +144,8 @@ export default class Game {
 					var y1 = obj.y - obj.oy
 					var x2 = x1 + obj.width
 					var y2 = y1 + obj.height
-					if(f.point_in_rectangle(x, y, x1, y1, x2, y2)) return obj;
+					if(f.pointInRectangle(x, y, x1, y1, x2, y2))
+						return obj;
 				}
 			}
 		return undefined;

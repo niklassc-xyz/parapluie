@@ -121,7 +121,7 @@ export default class PhysicalEntity extends GameEntity {
 			let y1 = this.y - this.oy
 			let x2 = x1 + this.width
 			let y2 = y1 + this.height
-			if (f.point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
+			if (f.pointInRectangle(input.x, input.y, x1, y1, x2, y2)) {
 				g.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
 				g.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 			}
