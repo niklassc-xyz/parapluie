@@ -9,7 +9,12 @@ import ProgressManager from "../appEtc/ProgressManager.js";
 
 
 export default class Game {
-	constructor() {
+	/**
+	 * Initialize a new game
+	 *
+	 * @param {Room} initalRoom - The room that the game starts with
+	 */
+	constructor(initalRoom) {
 		// TODO remove
 		globals.spr_Raumschiff[1] = document.getElementById("qualleRed");
 		globals.spr_Raumschiff[2] = document.getElementById("qualleBlue");
@@ -33,14 +38,14 @@ export default class Game {
 		this.stepCount = 0;
 
 		this.input = new Input(this);
-
 		this.storage = new Storage("localStorage");
+
+		// TODO part of engine?
 		this.progressManager = new ProgressManager(this.storage);
-		this.room = new Startpage(this);
+
+		this.room = new initalRoom(this);
 
 		setInterval(() => this.step(), 1000/60); // 60 FPS
-
-		// setTimeout(() => this.resizeCanvas(), 100);
 	}
 
 	resizeCanvas() {
