@@ -12,7 +12,7 @@ export default class Game {
 	 *
 	 * @param {Room} initalRoom - The room that the game starts with
 	 */
-	constructor(initalRoom) {
+	constructor(initalRoom, fps=60) {
 		// TODO move to room?
 		this.roomWidth = 1280;
 		this.roomHeight = 720;
@@ -37,7 +37,7 @@ export default class Game {
 		this.initialRoom = initalRoom;
 		this.room = new this.initialRoom(this);
 
-		setInterval(() => this.step(), 1000/60); // 60 FPS
+		setInterval(() => this.step(), 1000/fps);
 	}
 
 	resizeCanvas() {
