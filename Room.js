@@ -1,18 +1,22 @@
 import Settings from "./Settings.js";
-import Startpage from "../rooms/Startpage.js";
-
 
 // Abstract Class
 
 export default class Room {
 	static background = "datafiles/backgrounds/background2-g1.png";
 
-	constructor(g) {
+	constructor(g, returnRoom = undefined) {
 		if (this.constructor == Room) {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
 
 		this.g = g;
+
+		if (typeof(initialRoom) === undefined) {
+			this.returnRoom = this.g.initialRoom;		
+		} else {
+			this.returnRoom = returnRoom;
+		}
 
 		this.roomEntered = this.g.stepCount;
 
@@ -21,7 +25,7 @@ export default class Room {
 
 	// TODO implement, return to previous room
 	return() {
-		this.g.gotoRoom(Startpage);
+		this.g.gotoRoom(this.returnRoom);
 	}
 
 	step() {

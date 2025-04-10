@@ -34,7 +34,8 @@ export default class Game {
 		// TODO part of engine?
 		this.progressManager = new ProgressManager(this.storage);
 
-		this.room = new initalRoom(this);
+		this.initialRoom = initalRoom;
+		this.room = new this.initialRoom(this);
 
 		setInterval(() => this.step(), 1000/60); // 60 FPS
 	}
