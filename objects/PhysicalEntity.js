@@ -45,7 +45,7 @@ export default class PhysicalEntity extends GameEntity {
 		this.speed = speed;
 
 		// Calc horizontal and vertical speeds
-		let radDeg = f.degtorad(direction);
+		let radDeg = f.degToRad(direction);
 		this.vspeed = Math.sin(radDeg) * speed;
 		this.hspeed = Math.cos(radDeg) * speed;
 	}
@@ -62,7 +62,7 @@ export default class PhysicalEntity extends GameEntity {
 		this.hspeed = hspeed;
 		this.vspeed = vspeed;
 
-		this.direction = f.radtodeg(Math.atan2(this.vspeed, this.hspeed));
+		this.direction = f.radToDeg(Math.atan2(this.vspeed, this.hspeed));
 
 		// Calc total speed from horizontal and vertical speed
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);

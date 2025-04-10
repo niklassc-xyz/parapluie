@@ -16,7 +16,7 @@ export default class SpriteEntity extends PhysicalEntity {
 			// Rotate before drawing
 			this.g.ctx.save();
 			this.g.ctx.translate(this.x, this.y);
-			this.g.ctx.rotate(f.degtorad(this.direction));//Math.PI/180 is to Radians
+			this.g.ctx.rotate(f.degToRad(this.direction));//Math.PI/180 is to Radians
 			this.g.ctx.drawImage(this.sprite, -this.ox, -this.oy, this.width, this.height);
 			this.g.ctx.restore();
 		} else {
