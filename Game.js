@@ -15,13 +15,6 @@ export default class Game {
 	 * @param {Room} initalRoom - The room that the game starts with
 	 */
 	constructor(initalRoom) {
-		// TODO remove
-		globals.spr_Raumschiff[1] = document.getElementById("qualleRed");
-		globals.spr_Raumschiff[2] = document.getElementById("qualleBlue");
-		globals.spr_Raumschiff[3] = document.getElementById("qualleGreen");
-		globals.spr_Raumschiff[4] = document.getElementById("qualleYellow");
-
-
 		// TODO move to room?
 		this.roomWidth = 1280;
 		this.roomHeight = 720;
