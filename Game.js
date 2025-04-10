@@ -1,9 +1,7 @@
 import Input from "./Input.js";
-import Startpage from "../rooms/Startpage.js";
 import Storage from "./Storage.js";
 import Settings from "./Settings.js";
 import * as f from "../functions.js";
-import * as globals from "../globals.js";
 import SimBubble from "../objects/SimBubble/SimBubble.js";
 import ProgressManager from "../appEtc/ProgressManager.js";
 
