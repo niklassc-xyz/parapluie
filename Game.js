@@ -161,10 +161,6 @@ export default class Game {
 		this.input.reset();
 
 		// TODO do this better
-		// if (!(room instanceof LevelRoom) && !(newRoom.prototype instanceof LevelRoom)) {
-			// 	console.log(SimBubble.all)
-			// 	room.objects.push.apply(room.objects, SimBubble.all);
-			// }
 		this.room.objects.push.apply(this.room.objects, SimBubble.all);
 
 		document.body.style.background = `url(${newRoom.background})`;
