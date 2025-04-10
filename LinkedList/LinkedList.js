@@ -1,6 +1,5 @@
 import LinkedListNode from "./LinkedListNode.js";
 
-// TODO move to engine
 // TODO iterator
 // TODO return node or val? → iterator needs nodes
 
