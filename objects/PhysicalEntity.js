@@ -32,10 +32,6 @@ export default class PhysicalEntity extends GameEntity {
 		
 	}
 
-	resize() {
-		// TODO remove?
-	}
-
 	setDirection(direction) {
 		this.setDirectionSpeed(direction, this.speed);
 	}
@@ -78,12 +74,6 @@ export default class PhysicalEntity extends GameEntity {
 		if(this.opt_swapScreen !== 0) {
 			this.swapScreen();
 		}
-	}
-
-	draw() {
-		// TODO remove
-		this.resize(); // TODO optimise somehow?
-		// this.drawBorder(true)
 	}
 
 	// TODO obolsete (ORIGIN)

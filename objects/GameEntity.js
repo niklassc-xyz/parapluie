@@ -7,7 +7,6 @@ export default class GameEntity {
 	}
 	step() {}
 	draw() {}
-	resize() {}
 	destroy() {
 		this.g.room.removeObject(this);
 	}
