@@ -166,7 +166,6 @@ export default class Game {
 			// 	room.objects.push.apply(room.objects, SimBubble.all);
 			// }
 		this.room.objects.push.apply(this.room.objects, SimBubble.all);
-		// this.room.objects.push.apply(this.room.objects, SimJelly.all);
 
 		document.body.style.background = `url(${newRoom.background})`;
 		document.body.style.backgroundSize = "cover";
