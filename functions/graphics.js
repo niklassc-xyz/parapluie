@@ -1,3 +1,8 @@
+// stroke* Outline version
+// fill*   Filled version
+// draw*   Both
+// render* Internal
+
 // TODO stokeLine → fill does not exist
 /**
  * Draws a line on a canvas
@@ -15,6 +20,19 @@ export function drawLine(ctx, x1, y1, x2, y2) {
 	ctx.stroke();
 }
 
+// Circle {{{
+/**
+ * Draws a circle, outline and filling
+ *
+ * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
+ * @param {number} x - Center x
+ * @param {number} y - Center y
+ * @param {number} r - Radius
+ */
+export function drawCircle(ctx, x, y, r) {
+	renderCircle(ctx, x, y, r, true, true);
+}
+
 /**
  * Draws a circle that is filled
  *
@@ -24,7 +42,7 @@ export function drawLine(ctx, x1, y1, x2, y2) {
  * @param {number} r - Radius
  */
 export function fillCircle(ctx, x, y, r) {
-	drawCircle(ctx, x, y, r, false);
+	renderCircle(ctx, x, y, r, true, false);
 }
 
 /**
@@ -36,22 +54,113 @@ export function fillCircle(ctx, x, y, r) {
  * @param {number} r - Radius
  */
 export function strokeCircle(ctx, x, y, r) {
-	drawCircle(ctx, x, y, r, true);
+	renderCircle(ctx, x, y, r, false, true);
+}
+// }}}
+
+// Roundrect {{{
+
+/**
+ * Draws a roundrect, outline and filling
+ *
+ * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
+ * @param {number} x1 - lowest x coordinate of roundrect
+ * @param {number} y1 - lowest y coordinate of roundrect
+ * @param {number} x2 - highest x coordinate of roundrect
+ * @param {number} y2 - highest y coordinate of roundrect
+ * @param {number} radius - Radius
+ */
+export function drawRoundrect(ctx, x1, y1, x2, y2, radius) {
+	renderRoundrect(ctx, x1, y1, x2, y2, radius, true, true);
 }
 
+/**
+ * Draws a roundrect, that is filled
+ *
+ * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
+ * @param {number} x1 - lowest x coordinate of roundrect
+ * @param {number} y1 - lowest y coordinate of roundrect
+ * @param {number} x2 - highest x coordinate of roundrect
+ * @param {number} y2 - highest y coordinate of roundrect
+ * @param {number} radius - Radius
+ */
+export function fillRoundrect(ctx, x1, y1, x2, y2, radius) {
+	renderRoundrect(ctx, x1, y1, x2, y2, radius, true, false);
+}
 
+/**
+ * Draws a roundrect, outline and filling
+ *
+ * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
+ * @param {number} x1 - lowest x coordinate of roundrect
+ * @param {number} y1 - lowest y coordinate of roundrect
+ * @param {number} x2 - highest x coordinate of roundrect
+ * @param {number} y2 - highest y coordinate of roundrect
+ * @param {number} radius - Radius
+ */
+export function drawRoundrect(ctx, x1, y1, x2, y2, radius) {
+	renderRoundrect(ctx, x1, y1, x2, y2, radius, false, true);
+}
 
+// }}}
 
 
 // ######### Private ######################################################## {
 
-function drawCircle(ctx, x, y, r, outline) {
+function renderCircle(ctx, x, y, r, fill, stroke) {
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-	if(outline)
-		ctx.stroke();
-	else
+	if (fill)
 		ctx.fill();
+	if (stroke)
+		ctx.stroke();
+}
+
+/**
+ * Draws a roundrect
+ *
+ * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
+ * @param {number} x1 - lowest x coordinate of roundrect
+ * @param {number} y1 - lowest y coordinate of roundrect
+ * @param {number} x2 - highest x coordinate of roundrect
+ * @param {number} y2 - highest y coordinate of roundrect
+ * @param {number} radius - Radius
+ * @param {boolean} fill - Whether to fill the roundrect
+ * @param {boolean} stroke - Whether to outline the roundrect
+ */
+function renderRoundrect(ctx, x1, y1, x2, y2, radius, fill, stroke) {
+	const width = x2 - x1;
+	const height = y2 - y1;
+
+	if (typeof stroke == 'undefined') {
+		stroke = true;
+	}
+	if (typeof radius === 'undefined') {
+		radius = 5;
+	}
+	if (typeof radius === 'number') {
+		radius = {tl: radius, tr: radius, br: radius, bl: radius};
+	} else {
+		var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+		for (var side in defaultRadius) {
+			radius[side] = radius[side] || defaultRadius[side];
+		}
+	}
+	ctx.beginPath();
+	ctx.moveTo(x1 + radius.tl, y2);
+	ctx.lineTo(x1 + width - radius.tr, y2);
+	ctx.quadraticCurveTo(x1 + width, y2, x1 + width, y2 + radius.tr);
+	ctx.lineTo(x1 + width, y2 + height - radius.br);
+	ctx.quadraticCurveTo(x1 + width, y2 + height, x1 + width - radius.br, y2 + height);
+	ctx.lineTo(x1 + radius.bl, y2 + height);
+	ctx.quadraticCurveTo(x1, y2 + height, x1, y2 + height - radius.bl);
+	ctx.lineTo(x1, y2 + radius.tl);
+	ctx.quadraticCurveTo(x1, y2, x1 + radius.tl, y2);
+	ctx.closePath();
+	if (fill)
+		ctx.fill();
+	if (stroke)
+		ctx.stroke();
 }
 
 // }}}
