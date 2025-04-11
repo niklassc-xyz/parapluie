@@ -6,8 +6,8 @@ import * as graphics from './functions/graphics.js';
 
 export default class Painter {
 	constructor(g, canvas) {
-		this.g = g;
-		this.canvas = canvas;
+		this.g = g; // TODO private
+		this.canvas = canvas; // TODO private
 		this.ctx = this.canvas.getContext("2d");
 
 		this.strokeStyle = "white";
