@@ -92,14 +92,15 @@ export default class PhysicalEntity extends GameEntity {
 	}
 
 	// TODO comment
+	// TODO test → canvas_width was replaced with roomWidth, also height
 	swapScreen() {
 		if(this.opt_swapScreen >= 2){
-			if(this.y > g.canvas_height + (this.height/2)) this.y = -(this.height/2);
-			if((this.height/2) + this.y < 0) this.y = g.canvas_height + (this.height/2);
+			if(this.y > g.roomHeight + (this.height/2)) this.y = -(this.height/2);
+			if((this.height/2) + this.y < 0) this.y = g.roomHeight + (this.height/2);
 		}
 		if(this.opt_swapScreen === 2) return;
-		if(this.x > g.canvas_width + (this.width/2)) this.x = -(this.width/2);
-		if((this.width/2) + this.x < 0) this.x = g.canvas_width + (this.width/2);
+		if(this.x > g.roomWidth + (this.width/2)) this.x = -(this.width/2);
+		if((this.width/2) + this.x < 0) this.x = g.roomWidth + (this.width/2);
 	}
 
 	// Sets hspeed and vspeed to move towards (x,y) with speed v
