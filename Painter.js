@@ -2,8 +2,11 @@
 // TODO roomWidth, roomHeight should not be  stored here
 // → maybe room or game should call resizeCanvas on roomGoto, if ratio changed
 
+import * as graphics from './functions/graphics.js';
+
 export default class Painter {
-	constructor(canvas, roomWidth, roomHeight) {
+	constructor(g, canvas) {
+		this.g = g;
 		this.canvas = canvas;
 		this.ctx = this.canvas.getContext("2d");
 
@@ -16,10 +19,10 @@ export default class Painter {
 		this.viewHeight;
 
 
-		this.resizeCanvas(roomWidth, roomHeight);
+		this.resizeCanvas();
 	}
 
-	resizeCanvas(roomWidth, roomHeight) {
+	resizeCanvas() {
 		// W/H the canvas will be displayed as
 		this.canvas.style.width = window.innerWidth;
 		this.canvas.style.height = window.innerHeight;
@@ -35,18 +38,18 @@ export default class Painter {
 		// → TODO use view dimensions instead of room
 		// let canvasRatio = canvas.style.width / canvas.style.height;
 		let windowRatio = window.innerWidth / window.innerHeight;
-		let roomRatio = roomWidth / roomHeight;
+		let roomRatio = this.g.roomWidth / this.g.roomHeight;
 
 		this.paddingVert = 0; // on each side
 		this.paddingHorz = 0; // on each side
 		if (windowRatio > roomRatio) {
 			this.viewHeight = roomHeight;
 			this.viewWidth = roomHeight * (window.innerWidth / window.innerHeight);
-			this.paddingHorz = (this.viewWidth - roomWidth) / 2;
+			this.paddingHorz = (this.viewWidth - this.g.roomWidth) / 2;
 		} else {
-			this.viewWidth = roomWidth;
-			this.viewHeight = roomWidth * (window.innerHeight / window.innerWidth);
-			this.paddingVert = (this.viewHeight - roomHeight) / 2;
+			this.viewWidth = this.g.roomWidth;
+			this.viewHeight = this.g.roomWidth * (window.innerHeight / window.innerWidth);
+			this.paddingVert = (this.viewHeight - this.g.roomHeight) / 2;
 		}
 
 		let xScalar = window.innerWidth / this.viewWidth;
@@ -65,5 +68,9 @@ export default class Painter {
 
 	clearRect(x, y, width, height) {
 		this.ctx.clearRect(x, y, width, height);
+	}
+
+	drawLine(x1, y1, x2, y2) {
+		graphics.drawLine(this.ctx, x1, y1, x2, y2);
 	}
 }

@@ -19,7 +19,7 @@ export default class Game {
 
 		const canvas = document.createElement("canvas");
 		document.body.insertBefore(canvas, document.body.childNodes[0]);
-		this.painter = new Painter(canvas, this.roomWidth, this.roomHeight);
+		this.painter = new Painter(this, canvas);
 
 		// Counts steps, paused when game is paused
 		this.stepCount = 0;
