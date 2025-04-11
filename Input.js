@@ -192,7 +192,7 @@ export default class Input {
 				let starty = selectedBubble.y + ndy*r;
 				this.g.painter.ctx.strokeStyle = "white";
 				this.g.painter.ctx.lineWidth = 3;
-				f.drawLine(this.g.painter.ctx, startx, starty, this.x, this.y);
+				this.g.painter.drawLine(startx, starty, this.x, this.y);
 			}
 
 			// Highlight selected bubble
