@@ -62,8 +62,8 @@ export default class Game {
 
 	draw() {
 		// Background
-		this.painter.clearRect(0, 0, this.painter.canvas.width, this.painter.canvas.height);
-		this.painter.clearRect(-this.paddingHorz, -this.paddingVert, this.roomWidth + 2*this.paddingHorz, this.roomHeight + 2*this.paddingVert);
+		// this.painter.clearRect(0, 0, this.painter.canvas.width, this.painter.canvas.height);
+		this.painter.clearRect(-this.painter.paddingHorz, -this.painter.paddingVert, this.roomWidth + 2*this.painter.paddingHorz, this.roomHeight + 2*this.painter.paddingVert);
 
 		this.room.draw(this);
 
