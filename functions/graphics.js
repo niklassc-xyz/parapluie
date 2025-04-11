@@ -89,7 +89,7 @@ export function fillRoundrect(ctx, x1, y1, x2, y2, radius) {
 }
 
 /**
- * Draws a roundrect, outline and filling
+ * Draws a roundrect, that is stroked (outlined)
  *
  * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
  * @param {number} x1 - lowest x coordinate of roundrect
@@ -98,7 +98,7 @@ export function fillRoundrect(ctx, x1, y1, x2, y2, radius) {
  * @param {number} y2 - highest y coordinate of roundrect
  * @param {number} radius - Radius
  */
-export function drawRoundrect(ctx, x1, y1, x2, y2, radius) {
+export function strokeRoundrect(ctx, x1, y1, x2, y2, radius) {
 	renderRoundrect(ctx, x1, y1, x2, y2, radius, false, true);
 }
 
@@ -128,16 +128,8 @@ function renderCircle(ctx, x, y, r, fill, stroke) {
  * @param {boolean} fill - Whether to fill the roundrect
  * @param {boolean} stroke - Whether to outline the roundrect
  */
-function renderRoundrect(ctx, x1, y1, x2, y2, radius, fill, stroke) {
-	const width = x2 - x1;
-	const height = y2 - y1;
-
-	if (typeof stroke == 'undefined') {
-		stroke = true;
-	}
-	if (typeof radius === 'undefined') {
-		radius = 5;
-	}
+function renderRoundrect(ctx, x1, y1, x2, y2, radius=5, fill=true, stroke=true) {
+	// TODO implement setting individual corner radius
 	if (typeof radius === 'number') {
 		radius = {tl: radius, tr: radius, br: radius, bl: radius};
 	} else {
@@ -146,16 +138,17 @@ function renderRoundrect(ctx, x1, y1, x2, y2, radius, fill, stroke) {
 			radius[side] = radius[side] || defaultRadius[side];
 		}
 	}
+
 	ctx.beginPath();
-	ctx.moveTo(x1 + radius.tl, y2);
-	ctx.lineTo(x1 + width - radius.tr, y2);
-	ctx.quadraticCurveTo(x1 + width, y2, x1 + width, y2 + radius.tr);
-	ctx.lineTo(x1 + width, y2 + height - radius.br);
-	ctx.quadraticCurveTo(x1 + width, y2 + height, x1 + width - radius.br, y2 + height);
-	ctx.lineTo(x1 + radius.bl, y2 + height);
-	ctx.quadraticCurveTo(x1, y2 + height, x1, y2 + height - radius.bl);
-	ctx.lineTo(x1, y2 + radius.tl);
-	ctx.quadraticCurveTo(x1, y2, x1 + radius.tl, y2);
+	ctx.moveTo(x1 + radius.tl, y1);
+	ctx.lineTo(x2 - radius.tr, y1);
+	ctx.quadraticCurveTo(x2, y1, x2, y1 + radius.tr);
+	ctx.lineTo(x2, y2 - radius.br);
+	ctx.quadraticCurveTo(x2, y2, x2 - radius.br, y2);
+	ctx.lineTo(x1 + radius.bl, y2);
+	ctx.quadraticCurveTo(x1, y2, x1, y2 - radius.bl);
+	ctx.lineTo(x1, y1 + radius.tl);
+	ctx.quadraticCurveTo(x1, y1, x1 + radius.tl, y1);
 	ctx.closePath();
 	if (fill)
 		ctx.fill();
