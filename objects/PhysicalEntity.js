@@ -122,32 +122,32 @@ export default class PhysicalEntity extends GameEntity {
 			let x2 = x1 + this.width
 			let y2 = y1 + this.height
 			if (f.pointInRectangle(input.x, input.y, x1, y1, x2, y2)) {
-				g.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				g.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
+				this.g.this.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+				this.g.this.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 			}
 		}
 
-		g.ctx.strokeStyle = "red";
-		g.ctx.lineWidth = 3;
-		g.ctx.setLineDash([6]);
-		g.ctx.strokeRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
-		g.ctx.setLineDash([]);
+		this.g.painter.ctx.strokeStyle = "red";
+		this.g.painter.ctx.lineWidth = 3;
+		this.g.painter.ctx.setLineDash([6]);
+		this.g.painter.ctx.strokeRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
+		this.g.painter.ctx.setLineDash([]);
 
 	}
 	
 	// For Debugging, draws (x,y)
 	drawXY() {
-		this.g.ctx.strokeStyle = "red";
-		this.g.ctx.lineWidth = 3;
+		this.g.painter.ctx.strokeStyle = "red";
+		this.g.painter.ctx.lineWidth = 3;
 
-		this.g.ctx.beginPath();
-		this.g.ctx.moveTo(this.x - 10, this.y - 10);
-		this.g.ctx.lineTo(this.x + 10, this.y + 10);
-		this.g.ctx.stroke();
+		this.g.painter.ctx.beginPath();
+		this.g.painter.ctx.moveTo(this.x - 10, this.y - 10);
+		this.g.painter.ctx.lineTo(this.x + 10, this.y + 10);
+		this.g.painter.ctx.stroke();
 
-		this.g.ctx.beginPath();
-		this.g.ctx.moveTo(this.x - 10, this.y + 10);
-		this.g.ctx.lineTo(this.x + 10, this.y - 10);
-		this.g.ctx.stroke();
+		this.g.painter.ctx.beginPath();
+		this.g.painter.ctx.moveTo(this.x - 10, this.y + 10);
+		this.g.painter.ctx.lineTo(this.x + 10, this.y - 10);
+		this.g.painter.ctx.stroke();
 	}
 }

@@ -34,15 +34,15 @@ export default class Room {
 
 	draw() {
 		if (Settings.debug) {
-			this.g.ctx.font = "16px fnt_Comforta_Bold";
-			this.g.ctx.textAlign = "left";
-			this.g.ctx.fillStyle = "white";
-			this.g.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);;
-			this.g.ctx.fillText("this.g.canvas. " + this.g.canvas.width + ", " + this.g.canvas.height, 16, 16 + 32*1);
-			this.g.ctx.fillText("this.g.canvas_ " + this.g.canvas_width + ", " + this.g.canvas_height, 16, 16 + 32*2);
-			this.g.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16, 16 + 32*3);
-			this.g.ctx.fillText(`scaling: ${Settings.scaling}`, 16, 16 + 32*4);
-			this.g.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16, 16 + 32*5)
+			this.g.painter.ctx.font = "16px fnt_Comforta_Bold";
+			this.g.painter.ctx.textAlign = "left";
+			this.g.painter.ctx.fillStyle = "white";
+			this.g.painter.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);;
+			this.g.painter.ctx.fillText("this.g.canvas. " + this.g.canvas.width + ", " + this.g.canvas.height, 16, 16 + 32*1);
+			this.g.painter.ctx.fillText("this.g.canvas_ " + this.g.canvas_width + ", " + this.g.canvas_height, 16, 16 + 32*2);
+			this.g.painter.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16, 16 + 32*3);
+			this.g.painter.ctx.fillText(`scaling: ${Settings.scaling}`, 16, 16 + 32*4);
+			this.g.painter.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16, 16 + 32*5)
 		}
 	}
 
