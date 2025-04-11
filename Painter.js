@@ -1,5 +1,5 @@
 // TODO encapsulate fill, stroke functions
-// TODO roomWidth, roomHeight should not be  stored here
+// TODO roomWidth, roomHeight needed in resizeCanvas
 // → maybe room or game should call resizeCanvas on roomGoto, if ratio changed
 
 import * as graphics from './functions/graphics.js';
@@ -70,9 +70,8 @@ export default class Painter {
 		this.ctx.clearRect(x, y, width, height);
 	}
 
-	// TODO strokeLine → no fill
-	drawLine(x1, y1, x2, y2) {
-		graphics.drawLine(this.ctx, x1, y1, x2, y2);
+	strokeLine(x1, y1, x2, y2) {
+		graphics.strokeLine(this.ctx, x1, y1, x2, y2);
 	}
 
 	// Circle {{{

@@ -13,7 +13,7 @@
  * @param {number} x2 - End x
  * @param {number} y2 - End y
  */
-export function drawLine(ctx, x1, y1, x2, y2) {
+export function strokeLine(ctx, x1, y1, x2, y2) {
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
