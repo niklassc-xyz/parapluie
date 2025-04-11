@@ -76,10 +76,10 @@ export default class Painter {
 	}
 
 	fillCircle(x, y, r) {
-		graphics.drawCircle(this.ctx, x, y, r, false);
+		graphics.fillCircle(this.ctx, x, y, r);
 	}
 
 	strokeCircle(x, y, r) {
-		graphics.drawCircle(this.ctx, x, y, r, true);
+		graphics.strokeCircle(this.ctx, x, y, r);
 	}
 }

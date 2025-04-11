@@ -199,11 +199,11 @@ export default class Input {
 			this.g.painter.ctx.lineWidth = 2;
 			this.g.painter.ctx.strokeStyle = "white";
 			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
-				f.drawCircle(this.g.painter.ctx,
+				this.g.painter.strokeCircle(
 							selectedBubble.x,
 							selectedBubble.y,
 							selectedBubble.width / 2 + i,
-							true);
+							);
 			}
 
 			this.circleCounter = (this.circleCounter + 1) % this.circleCounterMax;
@@ -214,10 +214,6 @@ export default class Input {
 	draw() {
 		this.selectedDrawing(this.selected);
 		this.selectedDrawing(this.selectedTouch);
-
-		// DEBUG
-		// this.g.painter.ctx.fillStyle = "red";
-		// f.drawCircle(this.g.painter.ctx, this.x, this.y, 8, false);
 	}
 
 
