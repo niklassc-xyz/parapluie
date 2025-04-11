@@ -14,7 +14,6 @@ export default class Room {
 
 		if (returnRoom === undefined) {
 			this.returnRoom = this.g.initialRoom;		
-			console.log("TEST");
 		} else {
 			this.returnRoom = returnRoom;
 		}
