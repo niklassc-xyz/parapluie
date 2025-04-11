@@ -70,7 +70,16 @@ export default class Painter {
 		this.ctx.clearRect(x, y, width, height);
 	}
 
+	// TODO strokeLine → no fill
 	drawLine(x1, y1, x2, y2) {
 		graphics.drawLine(this.ctx, x1, y1, x2, y2);
+	}
+
+	fillCircle(x, y, r) {
+		graphics.drawCircle(this.ctx, x, y, r, false);
+	}
+
+	strokeCircle(x, y, r) {
+		graphics.drawCircle(this.ctx, x, y, r, true);
 	}
 }
