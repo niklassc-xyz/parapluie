@@ -75,11 +75,82 @@ export default class Painter {
 		graphics.drawLine(this.ctx, x1, y1, x2, y2);
 	}
 
+	// Circle {{{
+	/**
+	 * Draws a circle, outline and filling
+	 *
+	 * @param {number} x - Center x
+	 * @param {number} y - Center y
+	 * @param {number} r - Radius
+	 */
+	drawCircle(x, y, r) {
+		graphics.drawCircle(this.ctx, x, y, r);
+	}
+
+	/**
+	 * Draws a circle that is filled
+	 *
+	 * @param {number} x - Center x
+	 * @param {number} y - Center y
+	 * @param {number} r - Radius
+	 */
 	fillCircle(x, y, r) {
 		graphics.fillCircle(this.ctx, x, y, r);
 	}
 
+	/**
+	 * Draws a circle that is stroked (outlined)
+	 *
+	 * @param {number} x - Center x
+	 * @param {number} y - Center y
+	 * @param {number} r - Radius
+	 */
 	strokeCircle(x, y, r) {
 		graphics.strokeCircle(this.ctx, x, y, r);
 	}
+	// }}}
+
+	// Roundrect {{{
+
+	/**
+	* Draws a roundrect, outline and filling
+	*
+	* @param {number} x1 - lowest x coordinate of roundrect
+	* @param {number} y1 - lowest y coordinate of roundrect
+	* @param {number} x2 - highest x coordinate of roundrect
+	* @param {number} y2 - highest y coordinate of roundrect
+	* @param {number} radius - Radius
+	*/
+	drawRoundrect(x1, y1, x2, y2, radius) {
+		graphics.drawRoundrect(this.ctx, x1, y1, x2, y2, radius);
+	}
+
+	/**
+	* Draws a roundrect that is filled
+	*
+	* @param {number} x1 - lowest x coordinate of roundrect
+	* @param {number} y1 - lowest y coordinate of roundrect
+	* @param {number} x2 - highest x coordinate of roundrect
+	* @param {number} y2 - highest y coordinate of roundrect
+	* @param {number} radius - Radius
+	*/
+	fillRoundrect(x1, y1, x2, y2, radius) {
+		graphics.fillRoundrect(this.ctx, x1, y1, x2, y2, radius);
+	}
+
+	/**
+	* Draws a roundrect that is stroked (outlined)
+	*
+	* @param {number} x1 - lowest x coordinate of roundrect
+	* @param {number} y1 - lowest y coordinate of roundrect
+	* @param {number} x2 - highest x coordinate of roundrect
+	* @param {number} y2 - highest y coordinate of roundrect
+	* @param {number} radius - Radius
+	*/
+	strokeRoundrect(x1, y1, x2, y2, radius) {
+		graphics.strokeRoundrect(this.ctx, x1, y1, x2, y2, radius);
+	}
+	// }}}
+
+
 }
