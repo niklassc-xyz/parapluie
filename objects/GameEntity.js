@@ -4,10 +4,11 @@
 export default class GameEntity {
 	constructor(g) {
 		this.g = g;
+		this.parent = null; // Stores object that will call step, draw, destroy (usually the room)
 	}
 	step() {}
 	draw() {}
 	destroy() {
-		this.g.room.removeObject(this);
+		this.parent.removeObject(this);
 	}
 }

@@ -47,6 +47,7 @@ export default class Room {
 	}
 
 	addObject(obj) {
+		obj.parent = this;
 		var pos = this.objects.length;
 		this.objects[pos] = obj;
 

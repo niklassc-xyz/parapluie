@@ -2,7 +2,6 @@ import Input from "./Input.js";
 import Storage from "./Storage.js";
 import Settings from "./Settings.js";
 import * as f from "../functions.js";
-import SimBubble from "../objects/SimBubble/SimBubble.js";
 import ProgressManager from "../appEtc/ProgressManager.js";
 
 
@@ -36,6 +35,8 @@ export default class Game {
 
 		this.initialRoom = initalRoom;
 		this.room = new this.initialRoom(this);
+
+		this.objects = [];
 
 		setInterval(() => this.step(), 1000/fps);
 	}
@@ -89,7 +90,12 @@ export default class Game {
 			return;
 		}
 
-		// step of all objects
+		// step of all global game objects
+		for(var i = 0; i < this.objects.length; i++){
+			this.objects[i].step();
+		}
+
+		// step of all objects in current room
 		for(var i = 0; i < this.room.objects.length; i++){
 			this.room.objects[i].step();
 		}
@@ -115,8 +121,14 @@ export default class Game {
 
 		this.room.draw(this);
 
+		// step of all global game objects
+		for(var i = 0; i < this.objects.length; i++){
+			this.objects[i].draw(this);
+		}
+
 		// draw of all objects
 		for(var i = 0; i < this.room.objects.length; i++){
+			// TODO why is this check necessary
 			if(this.room.objects[i] !== undefined){
 				this.room.objects[i].draw(this);
 			}
@@ -151,6 +163,28 @@ export default class Game {
 		return undefined;
 	}
 
+	addObject(obj) {
+		obj.parent = this;
+		var pos = this.objects.length;
+		this.objects[pos] = obj;
+
+		return obj;
+	}
+
+	// Simply removes the object `obj` from game.objects and thus from the
+	// game loop.
+	removeObject(obj) {
+		for (var i = 0; i < this.objects.length; i++) {
+			if(this.objects[i] === obj) {
+				this.objects.splice(i, 1);
+				return true;
+			}
+		}
+
+		console.error("Attempted to deleted object that is not in g.objects");
+		return false;
+	}
+
 	// Receives room class, instantiates it and changes room to it
 	gotoRoom(newRoom){
 		console.log("Going to room", newRoom.name)
@@ -161,9 +195,6 @@ export default class Game {
 		// this.room = new newRoom(this, newRoom);
 		this.room = new newRoom(this);
 		this.input.reset();
-
-		// TODO do this better
-		this.room.objects.push.apply(this.room.objects, SimBubble.all);
 
 		document.body.style.background = `url(${newRoom.background})`;
 		document.body.style.backgroundSize = "cover";
