@@ -140,14 +140,11 @@ export default class Game {
 	}
 
 	// Receives room class, instantiates it and changes room to it
-	gotoRoom(newRoom){
-		console.log("Going to room", newRoom.name)
-
+	gotoRoom(newRoom, returnRoom=undefined) {
+		console.log("Going to room", newRoom.name);
 
 		// Set new room
-		// this.room = new newRoom(this.room.constructor.name);
-		// this.room = new newRoom(this, newRoom);
-		this.room = new newRoom(this);
+		this.room = new newRoom(this, returnRoom);
 		this.input.reset();
 
 		document.body.style.background = `url(${newRoom.background})`;
