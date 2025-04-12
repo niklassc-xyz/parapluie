@@ -1,7 +1,11 @@
-// All objects that can be stored in room.objects have to extend from this so
-// that they are guaranteed to have the methods.
-
+/**
+ * All objects that can be stored in room.objects have to extend from this so
+ * that they are guaranteed to have the methods.
+ */
 export default class GameEntity {
+	/**
+	 * @param {Game} g - Game reference
+	 */
 	constructor(g) {
 		this.g = g;
 		this.parent = null; // Stores object that will call step, draw, destroy (usually the room)

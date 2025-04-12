@@ -3,6 +3,7 @@ import Storage from "./Storage.js";
 import Settings from "./Settings.js";
 import * as f from "../functions.js";
 import ProgressManager from "../appEtc/ProgressManager.js";
+import Painter from "./Painter.js";
 
 
 export default class Game {
@@ -16,13 +17,17 @@ export default class Game {
 		this.roomWidth = 1280;
 		this.roomHeight = 720;
 
-		this.paddingVert = 0;
-		this.paddingHorz = 0;
+		const canvas = document.createElement("canvas");
+		document.body.insertBefore(canvas, document.body.childNodes[0]);
+		this.painter = new Painter(canvas, this.roomWidth, this.roomHeight);
+		window.addEventListener('resize', () => { this.painter.resizeCanvas(this.roomWidth, this.roomHeight) });
+		// this.resizeTimeoutFunctionId;
+		// window.addEventListener('resize', () => {
+		// 	console.log(this.resizeTimeoutFunctionId);
+		// 	clearTimeout(this.resizeTimeoutFunctionId);
 
-		this.canvas = document.createElement("canvas");
-		this.ctx = this.canvas.getContext("2d");
-		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-		this.resizeCanvas();
+		// 	this.resizeTimeoutFunctionId = setTimeout(() => this.painter.resizeCanvas(this.roomWidth, this.roomHeight), 10);
+		// });
 
 		// Counts steps, paused when game is paused
 		this.stepCount = 0;
@@ -39,50 +44,6 @@ export default class Game {
 		this.objects = [];
 
 		setInterval(() => this.step(), 1000/fps);
-	}
-
-	resizeCanvas() {
-		// W/H the canvas will be displayed as
-		this.canvas.style.width = window.innerWidth;
-		this.canvas.style.height = window.innerHeight;
-
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
-		if (Settings.scaling) {
-			this.canvas.width *= window.devicePixelRatio;
-			this.canvas.height *= window.devicePixelRatio;
-		}
-
-		// Calculate room view
-		// → TODO use view dimensions instead of room
-		// let canvasRatio = canvas.style.width / canvas.style.height;
-		let windowRatio = window.innerWidth / window.innerHeight;
-		let roomRatio = this.roomWidth / this.roomHeight;
-
-		this.paddingVert = 0; // on each side
-		this.paddingHorz = 0; // on each side
-		if (windowRatio > roomRatio) {
-			this.viewHeight = this.roomHeight;
-			this.viewWidth = this.roomHeight * (window.innerWidth / window.innerHeight);
-			this.paddingHorz = (this.viewWidth - this.roomWidth) / 2;
-		} else {
-			this.viewWidth = this.roomWidth;
-			this.viewHeight = this.roomWidth * (window.innerHeight / window.innerWidth);
-			this.paddingVert = (this.viewHeight - this.roomHeight) / 2;
-		}
-
-		let xScalar = window.innerWidth / this.viewWidth;
-		let yScalar = window.innerHeight / this.viewHeight;
-
-		if (Settings.scaling) {
-			xScalar *= window.devicePixelRatio;
-			yScalar *= window.devicePixelRatio;
-		}
-
-		console.log("scalars", xScalar, yScalar);
-
-		this.ctx.scale(xScalar, yScalar);
-		this.ctx.translate(this.paddingHorz, this.paddingVert);
 	}
 
 	step() {
@@ -109,15 +70,8 @@ export default class Game {
 
 	draw() {
 		// Background
-		// ctx.fillStyle = "#000000";
-		// ctx.fillRect(0, 0, canvas_width, canvas_height);
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.ctx.clearRect(-this.paddingHorz, -this.paddingVert, this.roomWidth + 2*this.paddingHorz, this.roomHeight + 2*this.paddingVert);
-
-		// // Debug
-		// this.ctx.lineWidth = "4";
-		// this.ctx.strokeStyle = "red";
-		// this.ctx.strokeRect(0, 0, this.roomWidth, this.roomHeight);
+		// this.painter.clearRect(0, 0, this.painter.canvas.width, this.painter.canvas.height);
+		this.painter.clearRect(-this.painter.paddingHorz, -this.painter.paddingVert, this.roomWidth + 2*this.painter.paddingHorz, this.roomHeight + 2*this.painter.paddingVert);
 
 		this.room.draw(this);
 

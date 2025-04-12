@@ -13,21 +13,18 @@ export default class Input {
 
 		this.selected = undefined;
 		this.selectedTouch = undefined; // TODO merge again?
-	
-		this.canvas = g.canvas;	
-		this.ctx = g.ctx;
 
 		// For circle animation
 		this.circleCounterMax = 20;
 		this.circleCounter = 0;
 
-		this.canvas.addEventListener('mousedown', (e) => this.mousedown(e), false);
-		this.canvas.addEventListener('mousemove', (e) => this.mousemove(e), false);
-		this.canvas.addEventListener('mouseup', (e) => this.mouseup(e), false);
+		this.g.painter.canvas.addEventListener('mousedown', (e) => this.mousedown(e), false);
+		this.g.painter.canvas.addEventListener('mousemove', (e) => this.mousemove(e), false);
+		this.g.painter.canvas.addEventListener('mouseup', (e) => this.mouseup(e), false);
 
-		this.canvas.addEventListener('touchstart', (e) => this.touchstart(e), false);
-		this.canvas.addEventListener('touchmove', (e) => this.touchmove(e), false);
-		this.canvas.addEventListener('touchend', (e) => this.touchend(e), false);
+		this.g.painter.canvas.addEventListener('touchstart', (e) => this.touchstart(e), false);
+		this.g.painter.canvas.addEventListener('touchmove', (e) => this.touchmove(e), false);
+		this.g.painter.canvas.addEventListener('touchend', (e) => this.touchend(e), false);
 
 
 		// TODO change Object when renamed
@@ -68,13 +65,9 @@ export default class Input {
 	}
 
 	updateCooordinates(event) {
-		let rect = this.canvas.getBoundingClientRect();
+		let rect = this.g.painter.canvas.getBoundingClientRect();
 		this.setX(this.xScreenToInternal(event.clientX - rect.left));
 		this.setY(this.yScreenToInternal(event.clientY - rect.top));
-
-		// console.log(event);
-		// this.setX(f.xScreenToInternal(event.clientX));
-		// this.setY(f.yScreenToInternal(event.clientY));
 	}
 
 	// TODO remove?
@@ -197,20 +190,20 @@ export default class Input {
 				let ndy = dy / dist;
 				let startx = selectedBubble.x + ndx*r;
 				let starty = selectedBubble.y + ndy*r;
-				this.g.ctx.strokeStyle = "white";
-				this.g.ctx.lineWidth = 3;
-				f.drawLine(this.ctx, startx, starty, this.x, this.y);
+				this.g.painter.ctx.strokeStyle = "white";
+				this.g.painter.ctx.lineWidth = 3;
+				this.g.painter.strokeLine(startx, starty, this.x, this.y);
 			}
 
 			// Highlight selected bubble
-			this.g.ctx.lineWidth = 2;
-			this.g.ctx.strokeStyle = "white";
+			this.g.painter.ctx.lineWidth = 2;
+			this.g.painter.ctx.strokeStyle = "white";
 			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
-				f.drawCircle(this.g.ctx,
+				this.g.painter.strokeCircle(
 							selectedBubble.x,
 							selectedBubble.y,
 							selectedBubble.width / 2 + i,
-							true);
+							);
 			}
 
 			this.circleCounter = (this.circleCounter + 1) % this.circleCounterMax;
@@ -221,23 +214,16 @@ export default class Input {
 	draw() {
 		this.selectedDrawing(this.selected);
 		this.selectedDrawing(this.selectedTouch);
-
-		// this.g.ctx.fillStyle = "red";
-		// f.drawCircle(this.g.ctx, this.x, this.y, 8, false);
 	}
 
 
 	// Converts xD to x
 	xScreenToInternal(xD) {
-		// return xD / g.canvasStyleWidth * g.roomWidth;
-		// return xD / window.innerWidth * this.g.roomWidth;
-		return xD / window.innerWidth * this.g.viewWidth - this.g.paddingHorz;
+		return xD / window.innerWidth * this.g.painter.viewWidth - this.g.painter.paddingHorz;
 	}
 
 	// Converts yD to y
 	yScreenToInternal(yD) {
-		// return yD / g.canvasStyleHeight * g.roomHeight;
-		// return yD / window.innerHeight * this.g.roomHeight;
-		return yD / window.innerHeight * this.g.viewHeight - this.g.paddingVert;
+		return yD / window.innerHeight * this.g.painter.viewHeight - this.g.painter.paddingVert;
 	}
 }
