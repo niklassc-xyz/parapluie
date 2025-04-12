@@ -19,7 +19,15 @@ export default class Game {
 
 		const canvas = document.createElement("canvas");
 		document.body.insertBefore(canvas, document.body.childNodes[0]);
-		this.painter = new Painter(this, canvas);
+		this.painter = new Painter(canvas, this.roomWidth, this.roomHeight);
+		window.addEventListener('resize', () => { this.painter.resizeCanvas(this.roomWidth, this.roomHeight) });
+		// this.resizeTimeoutFunctionId;
+		// window.addEventListener('resize', () => {
+		// 	console.log(this.resizeTimeoutFunctionId);
+		// 	clearTimeout(this.resizeTimeoutFunctionId);
+
+		// 	this.resizeTimeoutFunctionId = setTimeout(() => this.painter.resizeCanvas(this.roomWidth, this.roomHeight), 10);
+		// });
 
 		// Counts steps, paused when game is paused
 		this.stepCount = 0;

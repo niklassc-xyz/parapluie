@@ -5,8 +5,7 @@
 import * as graphics from './functions/graphics.js';
 
 export default class Painter {
-	constructor(g, canvas) {
-		this.g = g; // TODO private
+	constructor(canvas, roomWidth, roomHeight) {
 		this.canvas = canvas; // TODO private
 		this.ctx = this.canvas.getContext("2d");
 
@@ -18,11 +17,10 @@ export default class Painter {
 		this.viewWidth;
 		this.viewHeight;
 
-
-		this.resizeCanvas();
+		this.resizeCanvas(roomWidth, roomHeight);
 	}
 
-	resizeCanvas() {
+	resizeCanvas(roomWidth, roomHeight) {
 		// W/H the canvas will be displayed as
 		this.canvas.style.width = window.innerWidth;
 		this.canvas.style.height = window.innerHeight;
@@ -38,18 +36,18 @@ export default class Painter {
 		// → TODO use view dimensions instead of room
 		// let canvasRatio = canvas.style.width / canvas.style.height;
 		let windowRatio = window.innerWidth / window.innerHeight;
-		let roomRatio = this.g.roomWidth / this.g.roomHeight;
+		let roomRatio = roomWidth / roomHeight;
 
 		this.paddingVert = 0; // on each side
 		this.paddingHorz = 0; // on each side
 		if (windowRatio > roomRatio) {
 			this.viewHeight = roomHeight;
 			this.viewWidth = roomHeight * (window.innerWidth / window.innerHeight);
-			this.paddingHorz = (this.viewWidth - this.g.roomWidth) / 2;
+			this.paddingHorz = (this.viewWidth - roomWidth) / 2;
 		} else {
-			this.viewWidth = this.g.roomWidth;
-			this.viewHeight = this.g.roomWidth * (window.innerHeight / window.innerWidth);
-			this.paddingVert = (this.viewHeight - this.g.roomHeight) / 2;
+			this.viewWidth = roomWidth;
+			this.viewHeight = roomWidth * (window.innerHeight / window.innerWidth);
+			this.paddingVert = (this.viewHeight - roomHeight) / 2;
 		}
 
 		let xScalar = window.innerWidth / this.viewWidth;
