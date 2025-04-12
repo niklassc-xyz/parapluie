@@ -94,7 +94,7 @@ export default class PhysicalEntity extends GameEntity {
 	// TODO comment
 	// TODO test → canvas_width was replaced with roomWidth, also height
 	swapScreen() {
-		if(this.opt_swapScreen >= 2){
+		if(this.opt_swapScreen >= 2) {
 			if(this.y > g.roomHeight + (this.height/2)) this.y = -(this.height/2);
 			if((this.height/2) + this.y < 0) this.y = g.roomHeight + (this.height/2);
 		}
@@ -104,7 +104,7 @@ export default class PhysicalEntity extends GameEntity {
 	}
 
 	// Sets hspeed and vspeed to move towards (x,y) with speed v
-	moveTowardsPoint(x, y, v){
+	moveTowardsPoint(x, y, v) {
 		let dir = f.pointDirection(this.x, this.y, x, y);
 
 		if(v === undefined)

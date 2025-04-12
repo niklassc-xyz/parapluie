@@ -7,7 +7,7 @@ export default class ResourceManager {
 
 	static getSpriteFromPath(path) {
 		// sprite exists
-		if (this.#sprites[path] !== undefined){
+		if (this.#sprites[path] !== undefined) {
 			return this.#sprites[path];
 		}
 

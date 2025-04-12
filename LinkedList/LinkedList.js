@@ -44,10 +44,10 @@ export default class LinkedList {
 		this.add(val);
 	}
 
-	get(index){
+	get(index) {
 		let i = this.head;
 
-		if(index >= this.size){
+		if(index >= this.size) {
 			console.log("Error in LinkedList get(" + index + "): index out of list");
 			return false;
 		}
@@ -88,7 +88,7 @@ export default class LinkedList {
 		let str = "";
 		let i = this.head;
 
-		while(i.next != null){
+		while(i.next != null) {
 			str += i.val + " ";
 			i = i.next;
 		}

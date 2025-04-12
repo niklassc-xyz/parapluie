@@ -52,12 +52,12 @@ export default class Game {
 		}
 
 		// step of all global game objects
-		for(var i = 0; i < this.objects.length; i++){
+		for(var i = 0; i < this.objects.length; i++) {
 			this.objects[i].step();
 		}
 
 		// step of all objects in current room
-		for(var i = 0; i < this.room.objects.length; i++){
+		for(var i = 0; i < this.room.objects.length; i++) {
 			this.room.objects[i].step();
 		}
 
@@ -76,14 +76,14 @@ export default class Game {
 		this.room.draw(this);
 
 		// step of all global game objects
-		for(var i = 0; i < this.objects.length; i++){
+		for(var i = 0; i < this.objects.length; i++) {
 			this.objects[i].draw(this);
 		}
 
 		// draw of all objects
-		for(var i = 0; i < this.room.objects.length; i++){
+		for(var i = 0; i < this.room.objects.length; i++) {
 			// TODO why is this check necessary
-			if(this.room.objects[i] !== undefined){
+			if(this.room.objects[i] !== undefined) {
 				this.room.objects[i].draw(this);
 			}
 		}
@@ -105,7 +105,7 @@ export default class Game {
 			*/
 			for(var i = 0; i < this.room.objects.length; i++) {
 				var obj = this.room.objects[i];
-				if(obj instanceof cls){
+				if(obj instanceof cls) {
 					var x1 = obj.x - obj.ox
 					var y1 = obj.y - obj.oy
 					var x2 = x1 + obj.width
