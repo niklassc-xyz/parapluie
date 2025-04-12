@@ -16,6 +16,9 @@ A simple, build- and dependency-free JavaScript engine
 All rooms extend the Room class. Stores list of objects `objects` and creates
 objects.
 
+Each room can optionally be initialized with a `returnRoom` (use
+`Game.gotoRoom`). When `Room.return` is called it will return to this room.
+
 ## step() and draw()
 
 In each interval first step() and then draw() from the room is called. In the
