@@ -37,6 +37,7 @@ export default class Game {
 		this.initialRoom = initalRoom;
 		this.room = new this.initialRoom(this);
 
+		// TODO rename to entities
 		this.objects = [];
 
 		setInterval(() => this.step(), 1000/fps);

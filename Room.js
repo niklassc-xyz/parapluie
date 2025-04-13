@@ -20,6 +20,7 @@ export default class Room {
 
 		this.roomEntered = this.g.stepCount;
 
+		// TODO rename to entities
 		this.objects = [];
 	}
 
