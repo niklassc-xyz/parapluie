@@ -21,7 +21,7 @@ export function pointDirection(x1, y1, x2, y2) { // TODO test
 	let dx = x2 - x1;
 	let dy = y2 - y1;
 
-	return math.radToDeg(Math.atan2(dy, dx));
+	return radToDeg(Math.atan2(dy, dx));
 }
 
 // Mathematical modulo
