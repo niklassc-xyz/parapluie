@@ -5,7 +5,7 @@ export default class Settings {
 	static experimental = true;
 	static scaling = true;
 	static paused = false;
-	static mute = false;
+	static mute = true;
 
 	/**
 	 * Whether jellies glow
