@@ -1,6 +1,6 @@
 import GameEntity from "./GameEntity.js";
-import * as f from "../../functions.js";
 import * as math from "../functions/math.js";
+import * as collision from "../functions/collision.js";
 
 // TOOD rename
 export default class PhysicalEntity extends GameEntity {
@@ -123,7 +123,7 @@ export default class PhysicalEntity extends GameEntity {
 			let y1 = this.y - this.oy
 			let x2 = x1 + this.width
 			let y2 = y1 + this.height
-			if (f.pointInRectangle(input.x, input.y, x1, y1, x2, y2)) {
+			if (collision.pointInRectangle(input.x, input.y, x1, y1, x2, y2)) {
 				this.g.this.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
 				this.g.this.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 			}
