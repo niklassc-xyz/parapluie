@@ -1,5 +1,7 @@
 import GameEntity from "./GameEntity.js";
 import * as f from "../../functions.js";
+import * as math from "../functions/math.js";
+import * as collision from "../functions/collision.js";
 
 // TOOD rename
 export default class PhysicalEntity extends GameEntity {
@@ -45,7 +47,7 @@ export default class PhysicalEntity extends GameEntity {
 		this.speed = speed;
 
 		// Calc horizontal and vertical speeds
-		let radDeg = f.degToRad(direction);
+		let radDeg = math.degToRad(direction);
 		this.vspeed = Math.sin(radDeg) * speed;
 		this.hspeed = Math.cos(radDeg) * speed;
 	}
@@ -62,7 +64,7 @@ export default class PhysicalEntity extends GameEntity {
 		this.hspeed = hspeed;
 		this.vspeed = vspeed;
 
-		this.direction = f.radToDeg(Math.atan2(this.vspeed, this.hspeed));
+		this.direction = math.radToDeg(Math.atan2(this.vspeed, this.hspeed));
 
 		// Calc total speed from horizontal and vertical speed
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);
@@ -105,7 +107,7 @@ export default class PhysicalEntity extends GameEntity {
 
 	// Sets hspeed and vspeed to move towards (x,y) with speed v
 	moveTowardsPoint(x, y, v) {
-		let dir = f.pointDirection(this.x, this.y, x, y);
+		let dir = collision.pointDirection(this.x, this.y, x, y);
 
 		if(v === undefined)
 			this.setDirection(dir);

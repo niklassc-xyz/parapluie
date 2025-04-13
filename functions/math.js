@@ -8,3 +8,10 @@ export function chooseRandom(arr) {
 	let ri = Math.floor(arr.length * Math.random());
 	return arr[ri];
 }
+
+export function radToDeg(rad) {
+	return rad * (180 / Math.PI);
+}
+export function degToRad(deg) {
+	return deg * (Math.PI / 180);
+}
