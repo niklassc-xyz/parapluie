@@ -1,7 +1,6 @@
 import GameEntity from "./GameEntity.js";
 import * as f from "../../functions.js";
 import * as math from "../functions/math.js";
-import * as collision from "../functions/collision.js";
 
 // TOOD rename
 export default class PhysicalEntity extends GameEntity {
@@ -107,7 +106,7 @@ export default class PhysicalEntity extends GameEntity {
 
 	// Sets hspeed and vspeed to move towards (x,y) with speed v
 	moveTowardsPoint(x, y, v) {
-		let dir = collision.pointDirection(this.x, this.y, x, y);
+		let dir = math.pointDirection(this.x, this.y, x, y);
 
 		if(v === undefined)
 			this.setDirection(dir);
