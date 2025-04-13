@@ -92,6 +92,7 @@ export default class Game {
 		this.input.draw(this);
 	}
 
+	// TODO remove this completely, currently only used for Input clicking
 	// TODO move to static method in PhysicalEntity?
 		// TODO cls has to be of type PhysicalEntity as it needs to have x,y,ox,oy,width,height
 	// Checks if the point (x,y) collides with an object of class cls
