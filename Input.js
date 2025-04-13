@@ -1,4 +1,4 @@
-import Button from "../objects/Button.js";
+import Button from "../parapluie/objects/util/Button.js";
 import Base from "../objects/bases/Base.js";
 import PhysicalEntity from "./objects/PhysicalEntity.js";
 import * as collision from "./functions/collision.js";
