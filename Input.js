@@ -1,7 +1,7 @@
-import * as f from "../functions.js";
 import Button from "../objects/Button.js";
 import Base from "../objects/bases/Base.js";
 import PhysicalEntity from "./objects/PhysicalEntity.js";
+import * as collision from "./functions/collision.js";
 
 // TODO make static?
 
@@ -182,7 +182,7 @@ export default class Input {
 
 			// Draw arrow from selected to cursor
 			let r = selectedBubble.width / 2;
-			if (!f.pointInCircle(this.x, this.y, selectedBubble.x, selectedBubble.y, r)) {
+			if (!collision.pointInCircle(this.x, this.y, selectedBubble.x, selectedBubble.y, r)) {
 				let dx = this.x - selectedBubble.x;
 				let dy = this.y - selectedBubble.y;
 				let dist = Math.sqrt(dx**2 + dy**2);
