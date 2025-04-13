@@ -23,3 +23,8 @@ export function pointDirection(x1, y1, x2, y2) { // TODO test
 
 	return math.radToDeg(Math.atan2(dy, dx));
 }
+
+// Mathematical modulo
+export function mMod(a, b) {
+	return ((a % b + b) % b);
+}
