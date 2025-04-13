@@ -2,7 +2,6 @@ import Input from "./Input.js";
 import Storage from "./Storage.js";
 import Settings from "./Settings.js";
 import * as collision from "./functions/collision.js";
-import ProgressManager from "../appEtc/ProgressManager.js";
 import Painter from "./Painter.js";
 
 
@@ -34,9 +33,6 @@ export default class Game {
 
 		this.input = new Input(this);
 		this.storage = new Storage("localStorage");
-
-		// TODO part of engine?
-		this.progressManager = new ProgressManager(this.storage);
 
 		this.initialRoom = initalRoom;
 		this.room = new this.initialRoom(this);
