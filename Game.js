@@ -141,6 +141,8 @@ export default class Game {
 	gotoRoom(newRoom, returnRoom = undefined) {
 		console.log(`Going to room ${newRoom.name} (Return room: ${returnRoom})`);
 
+		this.room.destroyEntities();
+
 		// Set new room
 		this.room = new newRoom(this, returnRoom);
 		this.input.reset();

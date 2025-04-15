@@ -26,7 +26,7 @@ export default class Button extends SpriteEntity {
 	draw() {
 		let lw = 2;
 
-		if (collision.pointInRectangle(this.g.input.x, this.g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
+		if (collision.pointInRectangle(this.g.input.getX(), this.g.input.getY(), this.x, this.y, this.x+this.width, this.y+this.height)) {
 			lw = 8;
 		}
 

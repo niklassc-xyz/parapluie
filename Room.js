@@ -46,6 +46,13 @@ export default class Room {
 		}
 	}
 
+	// Call destroy() on all entities in room
+	destroyEntities() {
+		while (this.objects.length > 0) {
+			this.objects[0].destroy();
+		}
+	}
+
 	addObject(obj) {
 		obj.parent = this;
 		var pos = this.objects.length;

@@ -26,11 +26,14 @@ export default class PhysicalEntity extends GameEntity {
 		this.opt_swapScreen = 0;
 	}
 
-	/**
-	 * Called when object is clicked or tapped (if object registered as clickable)
-	 */
-	click() {
-		
+	// Called when mousedown or touchstart on this entity
+	clickDown() {
+		console.log("DOWN");
+	}
+
+	// Called when mouseup touchend pressed on this entity
+	clickUp() {
+		console.log("UP");
 	}
 
 	setDirection(direction) {
@@ -123,9 +126,9 @@ export default class PhysicalEntity extends GameEntity {
 			let y1 = this.y - this.oy
 			let x2 = x1 + this.width
 			let y2 = y1 + this.height
-			if (collision.pointInRectangle(input.x, input.y, x1, y1, x2, y2)) {
-				this.g.this.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				this.g.this.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
+			if (collision.pointInRectangle(this.g.input.getX(), this.g.input.getY(), x1, y1, x2, y2)) {
+				this.g.painter.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+				this.g.painter.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 			}
 		}
 
