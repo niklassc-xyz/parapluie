@@ -1,39 +1,21 @@
-import GameEntity from "./GameEntity.js";
+import DimensionEntity from "./DimensionEntity.js";
 import * as math from "../functions/math.js";
-import * as collision from "../functions/collision.js";
 
-// TOOD rename
-export default class PhysicalEntity extends GameEntity {
+export default class PhysicalEntity extends DimensionEntity {
 	// TODO default values
 	constructor(g, x, y, width, height) {
-		super(g);
+		super(g, x, y, width, height);
 
-		this.x = x;
-		this.y = y;
-		this.ox = 0; // Origin
-		this.oy = 0;
 		this.hspeed = 0;
 		this.vspeed = 0;
 		this.direction = 0; // TODO document starting angle, deg/rad
 		this.speed = 0;
-		this.width = (width === undefined) ? 0 : width;
-		this.height = (height === undefined) ? 0 : height;;
 
 		// Set whether objects leaving the room should jump to the other side of
 		// the room:
 		// 0: off, 1: horizontal, vertical, both
 		// TODO camelCase, remove prefix
 		this.opt_swapScreen = 0;
-	}
-
-	// Called when mousedown or touchstart on this entity
-	clickDown() {
-		console.log("DOWN");
-	}
-
-	// Called when mouseup touchend pressed on this entity
-	clickUp() {
-		console.log("UP");
 	}
 
 	setDirection(direction) {
@@ -80,21 +62,6 @@ export default class PhysicalEntity extends GameEntity {
 		}
 	}
 
-	// TODO obolsete (ORIGIN)
-	isOutsideRoom_vert() {
-		return (this.x > this.g.roomWidth) || (this.width + this.x < 0);
-	}
-
-	// TODO obolsete (ORIGIN)
-	isOutsideRoom_horz() {
-		return (this.y > this.g.roomHeight) || (this.height + this.y < 0);
-	}
-
-	// TODO obolsete (ORIGIN)
-	isOutsideRoom() {
-		return this.isOutsideRoom_vert() || this.isOutsideRoom_horz();
-	}
-
 	// TODO comment
 	// TODO test → canvas_width was replaced with roomWidth, also height
 	swapScreen() {
@@ -116,43 +83,5 @@ export default class PhysicalEntity extends GameEntity {
 		else {
 			this.setDirectionSpeed(dir, v);
 		}
-	}
-
-	// For Debugging, draws border around object
-	// Set `hover` to also show when the object is hovered
-	drawBorder(hover=false) {
-		if (hover) {
-			let x1 = this.x - this.ox
-			let y1 = this.y - this.oy
-			let x2 = x1 + this.width
-			let y2 = y1 + this.height
-			if (collision.pointInRectangle(this.g.input.getX(), this.g.input.getY(), x1, y1, x2, y2)) {
-				this.g.painter.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				this.g.painter.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
-			}
-		}
-
-		this.g.painter.ctx.strokeStyle = "red";
-		this.g.painter.ctx.lineWidth = 3;
-		this.g.painter.ctx.setLineDash([6]);
-		this.g.painter.ctx.strokeRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
-		this.g.painter.ctx.setLineDash([]);
-
-	}
-	
-	// For Debugging, draws (x,y)
-	drawXY() {
-		this.g.painter.ctx.strokeStyle = "red";
-		this.g.painter.ctx.lineWidth = 3;
-
-		this.g.painter.ctx.beginPath();
-		this.g.painter.ctx.moveTo(this.x - 10, this.y - 10);
-		this.g.painter.ctx.lineTo(this.x + 10, this.y + 10);
-		this.g.painter.ctx.stroke();
-
-		this.g.painter.ctx.beginPath();
-		this.g.painter.ctx.moveTo(this.x - 10, this.y + 10);
-		this.g.painter.ctx.lineTo(this.x + 10, this.y - 10);
-		this.g.painter.ctx.stroke();
 	}
 }
