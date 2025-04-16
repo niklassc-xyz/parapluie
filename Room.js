@@ -61,6 +61,7 @@ export default class Room {
 		return obj;
 	}
 
+	// TODO rename to removeEntity
 	// Simply removes the object `obj` from room.objects and thus from the
 	// game loop.
 	removeObject(obj) {
