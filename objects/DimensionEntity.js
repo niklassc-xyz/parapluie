@@ -15,16 +15,6 @@ export default class PhysicalEntity extends GameEntity {
 		this.height = height;
 	}
 
-	// Called when mousedown or touchstart on this entity
-	clickDown() {
-		console.log("DOWN");
-	}
-
-	// Called when mouseup touchend pressed on this entity
-	clickUp() {
-		console.log("UP");
-	}
-
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom_vert() {
 		return (this.x > this.g.roomWidth) || (this.width + this.x < 0);
