@@ -1,5 +1,3 @@
-import Settings from "./Settings.js";
-
 // Abstract Class
 
 export default class Room {
@@ -34,14 +32,14 @@ export default class Room {
 	}
 
 	draw() {
-		if (Settings.debug) {
+		if (this.g.debug) {
 			this.g.painter.ctx.font = "16px fnt_Comforta_Bold";
 			this.g.painter.ctx.textAlign = "left";
 			this.g.painter.ctx.fillStyle = "white";
 			this.g.painter.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);;
 			this.g.painter.ctx.fillText("this.g.canvas. " + this.g.painter.canvas.width + ", " + this.g.painter.canvas.height, 16, 16 + 32*1);
 			this.g.painter.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16, 16 + 32*3);
-			this.g.painter.ctx.fillText(`scaling: ${Settings.scaling}`, 16, 16 + 32*4);
+			this.g.painter.ctx.fillText(`scaling: ${this.g.scaling}`, 16, 16 + 32*4);
 			this.g.painter.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16, 16 + 32*5)
 		}
 	}
