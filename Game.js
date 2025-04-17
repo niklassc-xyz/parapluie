@@ -1,7 +1,6 @@
 import Input from "./Input.js";
 import Storage from "./Storage.js";
 import Settings from "./Settings.js";
-import * as collision from "./functions/collision.js";
 import Painter from "./Painter.js";
 
 
@@ -110,9 +109,11 @@ export default class Game {
 
 	// Receives room class, instantiates it and changes room to it
 	gotoRoom(newRoom, returnRoom = undefined) {
-		console.log(`Going to room ${newRoom.name} (Return room: ${returnRoom})`);
+		console.log(`Going to room ${newRoom.name}`);
 
 		this.room.destroyEntities();
+
+		this.input.reset();
 
 		// Set new room
 		this.room = new newRoom(this, returnRoom);
