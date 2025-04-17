@@ -24,6 +24,16 @@ export default class Storage {
 		this.backend = backend;
 	}
 
+	// Sets key to value, if key is not set yet
+	// True if key was changed, false otherwise
+	setIfNotSet(key, val) {
+		if (this.get(key) == undefined) {
+			this.set(key, val);
+			return true;
+		}
+		return false;
+	}
+
 	// TODO remove
 	setCookie(key, val) {
 		document.cookie = key + " = " + val + "; expires=Fri, 01 Jan 2100 12:00:00 UTC";
