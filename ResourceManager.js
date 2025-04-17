@@ -42,7 +42,7 @@ export default class ResourceManager {
 		}
 
 		// sound don't exists → load
-		let sound = new Audio("path");
+		let sound = new Audio(path);
 		this._sounds[path] = sound;
 
 		sound.play();
