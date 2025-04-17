@@ -32,7 +32,7 @@ export default class Room {
 	}
 
 	draw() {
-		if (this.g.debug) {
+		if (this.g.getDebug()) {
 			this.g.painter.ctx.font = "16px fnt_Comforta_Bold";
 			this.g.painter.ctx.textAlign = "left";
 			this.g.painter.ctx.fillStyle = "white";
