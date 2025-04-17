@@ -4,11 +4,11 @@ import * as collision from "./functions/collision.js";
 // TODO make static?
 
 export default class Input {
-	#x; #y;
+	_x; _y;
 	constructor(g) {
 		this.g = g;
-		this.#x = 0;
-		this.#y = 0;
+		this._x = 0;
+		this._y = 0;
 
 		this.g.painter.canvas.addEventListener('mousedown', (e) => this.mousedown(e), false);
 		this.g.painter.canvas.addEventListener('mousemove', (e) => this.mousemove(e), false);
@@ -37,8 +37,8 @@ export default class Input {
 	registerClickable(ent, clickDownFn = ()=>{}, clickUpFn = ()=>{}) {
 		this.clickable.push({
 			entity: ent,
-			clickDown: clickDownFn,
-			clickUp: clickUpFn,
+			clickDown: clickDownFn.bind(ent),
+			clickUp: clickUpFn.bind(ent),
 		});
 	}
 
@@ -57,8 +57,8 @@ export default class Input {
 	notifyClickables(up) {
 		for (let i = 0; i < this.clickable.length; i++) {
 			let iEnt = this.clickable[i].entity;
-			if (collision.pointInRectangle(this.#x,
-			                               this.#y,
+			if (collision.pointInRectangle(this._x,
+			                               this._y,
 			                               iEnt.x - iEnt.ox,
 			                               iEnt.y - iEnt.oy,
 			                               iEnt.x - iEnt.ox + iEnt.width,
@@ -78,23 +78,23 @@ export default class Input {
 
 	// Resets input state
 	reset() {
-		this.#x = 0;
-		this.#y = 0;
+		this._x = 0;
+		this._y = 0;
 	}
 
 
 	updateCooordinates(event) {
 		let rect = this.g.painter.canvas.getBoundingClientRect();
-		this.#x = this.xScreenToInternal(event.clientX - rect.left);
-		this.#y = this.yScreenToInternal(event.clientY - rect.top);
+		this._x = this.xScreenToInternal(event.clientX - rect.left);
+		this._y = this.yScreenToInternal(event.clientY - rect.top);
 	}
 
 	getX() {
-		return this.#x;
+		return this._x;
 	}
 
 	getY() {
-		return this.#y;
+		return this._y;
 	}
 
 	touchstart(event) {
