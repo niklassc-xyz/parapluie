@@ -84,35 +84,6 @@ export default class Game {
 				this.room.objects[i].draw(this);
 			}
 		}
-
-		// GUI
-		this.input.draw(this);
-	}
-
-	// TODO remove this completely, currently only used for Input clicking
-	// TODO move to static method in PhysicalEntity?
-		// TODO cls has to be of type PhysicalEntity as it needs to have x,y,ox,oy,width,height
-	// Checks if the point (x,y) collides with an object of class cls
-	// @param {number} - X-coordinate
-	// @param {number} - Y-coordinate
-	// @param {PhysicalEntity} - Class
-	// @return {(PhysicalEntity|undefined)} of type cls or undefined
-	collision_point(x, y, cls) { // return obj oder undefined
-		/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
-			* Nur unpräzise Prüfung (pointInRectangle).
-			*/
-			for(var i = 0; i < this.room.objects.length; i++) {
-				var obj = this.room.objects[i];
-				if(obj instanceof cls) {
-					var x1 = obj.x - obj.ox
-					var y1 = obj.y - obj.oy
-					var x2 = x1 + obj.width
-					var y2 = y1 + obj.height
-					if(collision.pointInRectangle(x, y, x1, y1, x2, y2))
-						return obj;
-				}
-			}
-		return undefined;
 	}
 
 	addObject(obj) {
@@ -145,7 +116,6 @@ export default class Game {
 
 		// Set new room
 		this.room = new newRoom(this, returnRoom);
-		this.input.reset();
 
 		document.body.style.background = `url(${newRoom.background})`;
 		document.body.style.backgroundSize = "cover";
