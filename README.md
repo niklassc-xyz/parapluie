@@ -1,4 +1,4 @@
-# parapluie
+# Parapluie
 
 <p align="center">
 <img src="parapluie.svg" width="25%">
