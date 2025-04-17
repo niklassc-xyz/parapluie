@@ -15,8 +15,8 @@ export default class Game {
 		this.roomWidth = 1280;
 		this.roomHeight = 720;
 
-		this.debug = false;
-		this.scaling = true;
+		this._debug = false;
+		this._scaling = true;
 		this._paused = false;
 
 		const canvas = document.createElement("canvas");
@@ -148,5 +148,21 @@ export default class Game {
 
 	unpause() {
 		this._paused = false;
+	}
+
+	setDebug(val) {
+		this._debug = val;
+	}
+
+	getDebug(val) {
+		return this._debug;
+	}
+
+	setScaling(val) {
+		this._scaling = val;
+	}
+
+	getScaling(val) {
+		return this._scaling;
 	}
 }
