@@ -1,5 +1,11 @@
 # parapluie
+
+<p align="center">
+<img src="parapluie.svg" width="25%">
+<br>
 A simple, build- and dependency-free JavaScript engine
+</p>
+
 
 ## Variables
 
