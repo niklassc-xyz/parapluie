@@ -1,7 +1,7 @@
 import Input from "./Input.js";
 import Storage from "./Storage.js";
-import Settings from "./Settings.js";
 import Painter from "./Painter.js";
+import ResourceManager from "./ResourceManager.js";
 
 
 export default class Game {
@@ -14,6 +14,10 @@ export default class Game {
 		// TODO move to room?
 		this.roomWidth = 1280;
 		this.roomHeight = 720;
+
+		this.debug = false;
+		this.scaling = true;
+		this._paused = false;
 
 		const canvas = document.createElement("canvas");
 		document.body.insertBefore(canvas, document.body.childNodes[0]);
@@ -31,21 +35,25 @@ export default class Game {
 		this.stepCount = 0;
 
 		this.input = new Input(this);
+		this.resourceManager = new ResourceManager();
 		this.storage = new Storage("localStorage");
-
-		this.initialRoom = initalRoom;
-		this.room = new this.initialRoom(this);
 
 		// TODO rename to entities
 		this.objects = [];
 
-		setInterval(() => this.step(), 1000/fps);
+		this.initialRoom = initalRoom;
+		this.fps = fps;
+	}
+
+	// Enters the inital room and starts the game loop
+	start() {
+		this.room = new this.initialRoom(this);
+		setInterval(() => this.step(), 1000/this.fps);
 	}
 
 	step() {
-		if (Settings.paused) {
+		if (this._paused)
 			return;
-		}
 
 		// step of all global game objects
 		for(var i = 0; i < this.objects.length; i++) {
@@ -132,5 +140,13 @@ export default class Game {
 
 	hideEndgame() {
 		document.getElementById("endgameOverlay").classList.add("hidden")
+	}
+
+	pause() {
+		this._paused = true;
+	}
+
+	unpause() {
+		this._paused = false;
 	}
 }
