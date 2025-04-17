@@ -5,7 +5,7 @@
 import * as graphics from './functions/graphics.js';
 
 export default class Painter {
-	constructor(canvas, roomWidth, roomHeight) {
+	constructor(canvas, roomWidth, roomHeight, scaling=true) {
 		this.canvas = canvas; // TODO private
 		this.ctx = this.canvas.getContext("2d");
 
@@ -16,18 +16,19 @@ export default class Painter {
 		this.paddingHorz = 0;
 		this.viewWidth;
 		this.viewHeight;
+		this.scaling = scaling
 
-		this.resizeCanvas(roomWidth, roomHeight);
+		this.resizeCanvas(roomWidth, roomHeight, scaling);
 	}
 
-	resizeCanvas(roomWidth, roomHeight) {
+	resizeCanvas(roomWidth, roomHeight, scaling) {
 		// W/H the canvas will be displayed as
 		this.canvas.style.width = window.innerWidth;
 		this.canvas.style.height = window.innerHeight;
 
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
-		if (Settings.scaling) {
+		if (scaling) {
 			this.canvas.width *= window.devicePixelRatio;
 			this.canvas.height *= window.devicePixelRatio;
 		}
@@ -53,7 +54,7 @@ export default class Painter {
 		let xScalar = window.innerWidth / this.viewWidth;
 		let yScalar = window.innerHeight / this.viewHeight;
 
-		if (Settings.scaling) {
+		if (scaling) {
 			xScalar *= window.devicePixelRatio;
 			yScalar *= window.devicePixelRatio;
 		}
