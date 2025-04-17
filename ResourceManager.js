@@ -1,14 +1,14 @@
 export default class ResourceManager {
-	/**
-	 * Key-value store of sprites
-	 */
-	static #sprites = {};
+	constructor() {
+		this._sprites = {};
+		this._sounds = {};
+		this._mute = true;
+	}
 
-
-	static getSpriteFromPath(path) {
+	getSpriteFromPath(path) {
 		// sprite exists
-		if (this.#sprites[path] !== undefined) {
-			return this.#sprites[path];
+		if (this._sprites[path] !== undefined) {
+			return this._sprites[path];
 		}
 
 		// sprite don't exists → load
@@ -18,8 +18,33 @@ export default class ResourceManager {
 		// TODO ensure sprite is loaded
 		// await sprite.decode();
 
-		this.#sprites[path] = sprite;
+		this._sprites[path] = sprite;
 
 		return sprite
+	}
+
+	getMute() {
+		return this._mute;
+	}
+
+	setMute(val) {
+		this._mute = val;
+	}
+
+	playSoundFromPath(path) {
+		if (this._mute)
+			return;
+
+		// sound exists
+		if (this._sounds[path] !== undefined) {
+			this._sounds[path].play();
+			return;
+		}
+
+		// sound don't exists → load
+		let sound = new Audio("path");
+		this._sounds[path] = sound;
+
+		sound.play();
 	}
 }
