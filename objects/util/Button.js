@@ -8,12 +8,13 @@ export default class Button extends SpriteEntity {
 		const sprite = ResourceManager.getSpriteFromPath("datafiles/sprites/lock.png");
 		super(g, x, y, width, height, sprite);
 		this.text = text;
-		this.onClick = onClick;
 		this.borderColour = "white";
 		this.fontSize = 56;
 		this.setFontSize(this.fontSize);
 		this.disabled = (disabled === undefined) ? false : disabled;
 		this.animationSpeed = 0.1 + Math.random() * 0.2
+
+		this.g.input.registerClickable(this, undefined, onClick);
 
 		// TODO calculate font size based on width and text
 	}
@@ -81,5 +82,10 @@ export default class Button extends SpriteEntity {
 			this.x + this.width / 2,
 			this.y + this.height / 2
 		);
+	}
+
+	destroy() {
+		super.destroy();
+		this.g.input.unregisterClickable(this);
 	}
 }
