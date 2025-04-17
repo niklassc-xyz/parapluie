@@ -10,10 +10,6 @@ export default class Input {
 		this.#x = 0;
 		this.#y = 0;
 
-		// For circle animation
-		this.circleCounterMax = 20;
-		this.circleCounter = 0;
-
 		this.g.painter.canvas.addEventListener('mousedown', (e) => this.mousedown(e), false);
 		this.g.painter.canvas.addEventListener('mousemove', (e) => this.mousemove(e), false);
 		this.g.painter.canvas.addEventListener('mouseup', (e) => this.mouseup(e), false);
@@ -81,10 +77,10 @@ export default class Input {
 	}
 
 	// Resets input state
-	// reset() {
-	// 	this.#x = 0;
-	// 	this.#y = 0;
-	// }
+	reset() {
+		this.#x = 0;
+		this.#y = 0;
+	}
 
 
 	updateCooordinates(event) {
