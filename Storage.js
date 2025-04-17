@@ -25,13 +25,12 @@ export default class Storage {
 	}
 
 	// Sets key to value, if key is not set yet
-	// True if key was changed, false otherwise
+	// Returns the key after execution
 	setIfNotSet(key, val) {
 		if (this.get(key) == undefined) {
 			this.set(key, val);
-			return true;
 		}
-		return false;
+		return val;
 	}
 
 	// TODO remove
