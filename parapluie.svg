@@ -9,7 +9,45 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs1" />
+     id="defs1">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       id="filter24"
+       x="-0.10218626"
+       y="-0.086315789"
+       width="1.2543725"
+       height="1.22">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         id="feFlood23" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="3.000000"
+         id="feGaussianBlur23" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="5.000000"
+         dy="5.000000"
+         id="feOffset23" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite23" />
+      <feComposite
+         result="comp2"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite24" />
+    </filter>
+  </defs>
   <rect
      style="fill:#343434;fill-opacity:1;fill-rule:nonzero;stroke:#e0def4;stroke-width:5;stroke-linecap:round;stroke-dasharray:none"
      id="rect23"
@@ -22,7 +60,8 @@
      ry="50" />
   <g
      id="g2"
-     transform="matrix(1.144246,0.67143601,-0.77771621,1.3253662,85.729937,-98.5801)">
+     transform="matrix(1.144246,0.67143601,-0.77771621,1.3253662,85.729937,-98.5801)"
+     style="filter:url(#filter24)">
     <path
        d="m 50,100 q 50,-60 100,0 -15,-5 -30,0 -20,-10 -40,0 -15,-5 -30,0 z"
        stroke="#555"
