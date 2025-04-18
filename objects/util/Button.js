@@ -20,7 +20,6 @@ export default class Button extends SpriteEntity {
 	}
 
 	clickUp() {
-		console.log("CLICK", this.onClick);
 		this.onClick();
 	}
 
