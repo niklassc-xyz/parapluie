@@ -129,18 +129,6 @@ export default class Game {
 		document.body.style.backgroundSize = "cover";
 	}
 
-	showEndgame(won) {
-		let levelTime = (this.stepCount / 60).toFixed(1);
-
-		document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
-		document.getElementById("egTime").innerHTML = `${levelTime} seconds`
-		document.getElementById("endgameOverlay").classList.remove("hidden")
-	}
-
-	hideEndgame() {
-		document.getElementById("endgameOverlay").classList.add("hidden")
-	}
-
 	pause() {
 		this._paused = true;
 	}
