@@ -18,8 +18,7 @@ export default class Room {
 
 		this.roomEntered = this.g.stepCount;
 
-		// TODO rename to entities
-		this.objects = [];
+		this.entities = [];
 	}
 
 	// TODO implement, return to previous room
@@ -46,31 +45,31 @@ export default class Room {
 
 	// Call destroy() on all entities in room
 	destroyEntities() {
-		while (this.objects.length > 0) {
-			this.objects[0].destroy();
+		while (this.entities.length > 0) {
+			this.entities[0].destroy();
 		}
 	}
 
 	addObject(obj) {
 		obj.parent = this;
-		var pos = this.objects.length;
-		this.objects[pos] = obj;
+		var pos = this.entities.length;
+		this.entities[pos] = obj;
 
 		return obj;
 	}
 
 	// TODO rename to removeEntity
-	// Simply removes the object `obj` from room.objects and thus from the
+	// Simply removes the object `obj` from room.entities and thus from the
 	// game loop.
 	removeObject(obj) {
-		for (var i = 0; i < this.objects.length; i++) {
-			if(this.objects[i] === obj) {
-				this.objects.splice(i, 1);
+		for (var i = 0; i < this.entities.length; i++) {
+			if(this.entities[i] === obj) {
+				this.entities.splice(i, 1);
 				return true;
 			}
 		}
 
-		console.error("Attempted to deleted object that is not in g.room.objects");
+		console.error("Attempted to deleted object that is not in g.room.entities");
 		return false;
 	}
 }

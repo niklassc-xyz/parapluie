@@ -1,6 +1,6 @@
 /**
- * All objects that can be stored in room.objects have to extend from this so
- * that they are guaranteed to have the methods.
+ * All entities that can be part of the game loop have to extend from this so
+ * that they are guaranteed to have these methods.
  */
 export default class GameEntity {
 	/**

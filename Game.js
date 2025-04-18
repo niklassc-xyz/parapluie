@@ -38,8 +38,7 @@ export default class Game {
 		this.resourceManager = new ResourceManager();
 		this.storage = new Storage("localStorage");
 
-		// TODO rename to entities
-		this.objects = [];
+		this.entities = [];
 
 		this.initialRoom = initalRoom;
 		this.fps = fps;
@@ -55,14 +54,14 @@ export default class Game {
 		if (this._paused)
 			return;
 
-		// step of all global game objects
-		for(var i = 0; i < this.objects.length; i++) {
-			this.objects[i].step();
+		// step of all global game entities
+		for(var i = 0; i < this.entities.length; i++) {
+			this.entities[i].step();
 		}
 
-		// step of all objects in current room
-		for(var i = 0; i < this.room.objects.length; i++) {
-			this.room.objects[i].step();
+		// step of all entities in current room
+		for(var i = 0; i < this.room.entities.length; i++) {
+			this.room.entities[i].step();
 		}
 
 		this.room.step(this);
@@ -79,39 +78,39 @@ export default class Game {
 
 		this.room.draw(this);
 
-		// step of all global game objects
-		for(var i = 0; i < this.objects.length; i++) {
-			this.objects[i].draw(this);
+		// step of all global game entities
+		for(var i = 0; i < this.entities.length; i++) {
+			this.entities[i].draw(this);
 		}
 
-		// draw of all objects
-		for(var i = 0; i < this.room.objects.length; i++) {
+		// draw of all entities
+		for(var i = 0; i < this.room.entities.length; i++) {
 			// TODO why is this check necessary
-			if(this.room.objects[i] !== undefined) {
-				this.room.objects[i].draw(this);
+			if(this.room.entities[i] !== undefined) {
+				this.room.entities[i].draw(this);
 			}
 		}
 	}
 
 	addObject(obj) {
 		obj.parent = this;
-		var pos = this.objects.length;
-		this.objects[pos] = obj;
+		var pos = this.entities.length;
+		this.entities[pos] = obj;
 
 		return obj;
 	}
 
-	// Simply removes the object `obj` from game.objects and thus from the
+	// Simply removes the object `obj` from game.entities and thus from the
 	// game loop.
 	removeObject(obj) {
-		for (var i = 0; i < this.objects.length; i++) {
-			if(this.objects[i] === obj) {
-				this.objects.splice(i, 1);
+		for (var i = 0; i < this.entities.length; i++) {
+			if(this.entities[i] === obj) {
+				this.entities.splice(i, 1);
 				return true;
 			}
 		}
 
-		console.error("Attempted to deleted object that is not in g.objects");
+		console.error("Attempted to deleted object that is not in g.entities");
 		return false;
 	}
 
