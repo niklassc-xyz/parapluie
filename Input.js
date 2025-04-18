@@ -34,17 +34,13 @@ export default class Input {
 	 * @param {Function} downFunc - Function that is called when mousedown/touchstart is on obj
 	 * @param {Function} upFunc - Function that is called when mouseup/touchend is on obj
 	 */
-	registerClickable(ent, clickDownFn = ()=>{}, clickUpFn = ()=>{}) {
-		this.clickable.push({
-			entity: ent,
-			clickDown: clickDownFn.bind(ent),
-			clickUp: clickUpFn.bind(ent),
-		});
+	registerClickable(entity) {
+		this.clickable.push(entity);
 	}
 
 	unregisterClickable(entity) {
 		for (var i = 0; i < this.clickable.length; i++) {
-			if(this.clickable[i].entity === entity) {
+			if(this.clickable[i] === entity) {
 				this.clickable.splice(i, 1);
 				return true;
 			}
@@ -56,21 +52,22 @@ export default class Input {
 
 	notifyClickables(up) {
 		for (let i = 0; i < this.clickable.length; i++) {
-			let iEnt = this.clickable[i].entity;
+			let iEnt = this.clickable[i];
 			if (collision.pointInRectangle(this._x,
 			                               this._y,
 			                               iEnt.x - iEnt.ox,
 			                               iEnt.y - iEnt.oy,
 			                               iEnt.x - iEnt.ox + iEnt.width,
 			                               iEnt.y - iEnt.oy + iEnt.height)) {
-				if (up)
-					// console.log("BUTTON UP");
-					this.clickable[i].clickUp();
-					// iEnt.clickUp();
-				else
-					// console.log("BUTTON DOWN");
-					this.clickable[i].clickDown();
-					// iEnt.clickDown();
+				console.log("clicking", iEnt, this);
+				if (up) {
+					if (typeof iEnt.clickUp === "function")
+						iEnt.clickUp();
+				} else {
+					if (typeof iEnt.clickDown === "function")
+						iEnt.clickDown();
+				}
+				return;
 			}
 		
 		}

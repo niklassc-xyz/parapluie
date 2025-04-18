@@ -6,6 +6,7 @@ export default class Button extends SpriteEntity {
 	constructor(g, text, x, y, width, height, onClick, disabled) {
 		const sprite = "datafiles/sprites/lock.png";
 		super(g, x, y, width, height, sprite);
+		this.onClick = onClick;
 		this.text = text;
 		this.borderColour = "white";
 		this.fontSize = 56;
@@ -13,9 +14,14 @@ export default class Button extends SpriteEntity {
 		this.disabled = (disabled === undefined) ? false : disabled;
 		this.animationSpeed = 0.1 + Math.random() * 0.2
 
-		this.g.input.registerClickable(this, undefined, onClick);
+		this.g.input.registerClickable(this);
 
 		// TODO calculate font size based on width and text
+	}
+
+	clickUp() {
+		console.log("CLICK", this.onClick);
+		this.onClick();
 	}
 
 	setFontSize(size) {
