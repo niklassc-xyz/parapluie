@@ -5,7 +5,7 @@ export default class ResourceManager {
 		this._mute = true;
 	}
 
-	getSpriteFromPath(path) {
+	getSpriteByPath(path) {
 		// sprite exists
 		if (this._sprites[path] !== undefined) {
 			return this._sprites[path];
@@ -31,7 +31,7 @@ export default class ResourceManager {
 		this._mute = val;
 	}
 
-	playSoundFromPath(path) {
+	playSoundByPath(path) {
 		if (this._mute)
 			return;
 

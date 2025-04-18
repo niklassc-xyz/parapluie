@@ -16,7 +16,7 @@ export default class SpriteEntity extends PhysicalEntity {
 		super(g, x, y, width, height);
 
 		if (typeof sprite === "string") {
-			this.sprite = this.g.resourceManager.getSpriteFromPath(sprite);
+			this.sprite = this.g.resourceManager.getSpriteByPath(sprite);
 		} else {
 			// TODO check that sprite is an image
 			this.sprite = sprite;
