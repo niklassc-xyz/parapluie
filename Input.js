@@ -1,4 +1,3 @@
-import PhysicalEntity from "./objects/PhysicalEntity.js";
 import * as collision from "./functions/collision.js";
 
 // TODO make static?
@@ -19,12 +18,11 @@ export default class Input {
 		this.g.painter.canvas.addEventListener('touchend', (e) => this.touchend(e), false);
 
 
-		// TODO change Object when renamed
 		/**
 		  * List of clickable objects
-		  * @type {Array.<PhysicalEntity>}
+		  * @type {Array.<DimensionEntity>}
 		*/
-		this.clickable = [];
+		this._clickables = [];
 	}
 
 	/**
@@ -35,13 +33,13 @@ export default class Input {
 	 * @param {Function} upFunc - Function that is called when mouseup/touchend is on obj
 	 */
 	registerClickable(entity) {
-		this.clickable.push(entity);
+		this._clickables.push(entity);
 	}
 
 	unregisterClickable(entity) {
-		for (var i = 0; i < this.clickable.length; i++) {
-			if(this.clickable[i] === entity) {
-				this.clickable.splice(i, 1);
+		for (var i = 0; i < this._clickables.length; i++) {
+			if(this._clickables[i] === entity) {
+				this._clickables.splice(i, 1);
 				return true;
 			}
 		}
@@ -51,15 +49,14 @@ export default class Input {
 	}
 
 	notifyClickables(up) {
-		for (let i = 0; i < this.clickable.length; i++) {
-			let iEnt = this.clickable[i];
+		for (let i = 0; i < this._clickables.length; i++) {
+			let iEnt = this._clickables[i];
 			if (collision.pointInRectangle(this._x,
 			                               this._y,
 			                               iEnt.x - iEnt.ox,
 			                               iEnt.y - iEnt.oy,
 			                               iEnt.x - iEnt.ox + iEnt.width,
 			                               iEnt.y - iEnt.oy + iEnt.height)) {
-				console.log("clicking", iEnt, this);
 				if (up) {
 					if (typeof iEnt.clickUp === "function")
 						iEnt.clickUp();
