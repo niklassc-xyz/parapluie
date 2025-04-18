@@ -36,6 +36,17 @@ export default class Input {
 		this._clickables.push(entity);
 	}
 
+	draw() {
+		// Draw position of input
+		if (this.g.getDebug()) {
+			this.g.painter.ctx.strokeStyle = "red";
+			this.g.painter.ctx.lineWidth = 3;
+			const l = 8;
+			this.g.painter.strokeLine(this._x - l, this._y - l, this._x + l, this._y + l);
+			this.g.painter.strokeLine(this._x - l, this._y + l, this._x + l, this._y - l);
+		}
+	}
+
 	unregisterClickable(entity) {
 		for (var i = 0; i < this._clickables.length; i++) {
 			if(this._clickables[i] === entity) {
@@ -94,8 +105,8 @@ export default class Input {
 	touchstart(event) {
 		event.preventDefault(); // Prevent mouse events to fire as well
 
-		this.notifyClickables(false);
 		this.updateCooordinates(event.touches[0]);
+		this.notifyClickables(false);
 	}
 
 	touchmove(event) {
@@ -120,7 +131,6 @@ export default class Input {
 
 	mouseup(event) {
 		this.updateCooordinates(event)
-
 		this.notifyClickables(true);
 	}
 

@@ -66,7 +66,7 @@ export default class Game {
 
 		this.room.step(this);
 		this.stepCount++;
-		// input.step()
+		// this.input.step()
 
 		this.draw();
 	}
@@ -90,6 +90,8 @@ export default class Game {
 				this.room.entities[i].draw(this);
 			}
 		}
+
+		this.input.draw();
 	}
 
 	addObject(obj) {
