@@ -10,7 +10,7 @@ export default class Game {
 	 *
 	 * @param {Room} initalRoom - The room that the game starts with
 	 */
-	constructor(initalRoom, fps=60) {
+	constructor(initalRoom, fps=60, storageBackend="localStorage") {
 		// TODO move to room?
 		this.roomWidth = 1280;
 		this.roomHeight = 720;
@@ -36,7 +36,7 @@ export default class Game {
 
 		this.input = new Input(this);
 		this.resourceManager = new ResourceManager();
-		this.storage = new Storage("localStorage");
+		this.storage = new Storage(storageBackend);
 
 		this.entities = [];
 
