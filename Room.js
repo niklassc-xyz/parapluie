@@ -3,7 +3,7 @@
 export default class Room {
 	static background = "datafiles/backgrounds/background2-g1.png";
 
-	constructor(g, returnRoom = undefined) {
+	constructor(g, returnRoom=undefined) {
 		if (this.constructor == Room) {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
