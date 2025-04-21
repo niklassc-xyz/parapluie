@@ -117,7 +117,7 @@ export default class Game {
 	}
 
 	// Receives room class, instantiates it and changes room to it
-	gotoRoom(newRoom, returnRoom = undefined) {
+	gotoRoom(newRoom, returnRoom=undefined) {
 		console.log(`Going to room ${newRoom.name}`);
 
 		this.room.destroyEntities();
