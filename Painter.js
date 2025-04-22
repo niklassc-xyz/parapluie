@@ -65,8 +65,24 @@ export default class Painter {
 		this.ctx.translate(this.paddingHorz, this.paddingVert);
 	}
 
+	setFillStyle(style) {
+		this.ctx.fillStyle = style;
+	}
+
+	setStrokeStyle(style) {
+		this.ctx.strokeStyle = style;
+	}
+
 	clearRect(x, y, width, height) {
 		this.ctx.clearRect(x, y, width, height);
+	}
+
+	fillRect(x, y, width, height) {
+		this.ctx.fillRect(x, y, width, height);
+	}
+
+	strokeRect(x, y, width, height) {
+		this.ctx.strokeRect(x, y, width, height);
 	}
 
 	strokeLine(x1, y1, x2, y2) {
@@ -149,6 +165,5 @@ export default class Painter {
 		graphics.strokeRoundrect(this.ctx, x1, y1, x2, y2, radius);
 	}
 	// }}}
-
 
 }
