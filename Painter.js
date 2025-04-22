@@ -65,12 +65,32 @@ export default class Painter {
 		this.ctx.translate(this.paddingHorz, this.paddingVert);
 	}
 
+	setLineWidth(width) {
+		this.ctx.lineWidth = width;
+	}
+
 	setFillStyle(style) {
 		this.ctx.fillStyle = style;
 	}
 
 	setStrokeStyle(style) {
 		this.ctx.strokeStyle = style;
+	}
+
+	fillText(text, x, y) {
+		this.ctx.fillText(text, x, y);
+	}
+
+	strokeText(text, x, y) {
+		this.ctx.strokeText(text, x, y);
+	}
+
+	measureText(text) {
+		return this.ctx.measureText(text);
+	}
+
+	setFont(font) {
+		this.ctx.font = font;
 	}
 
 	clearRect(x, y, width, height) {
