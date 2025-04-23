@@ -9,6 +9,7 @@ export default class Button extends SpriteEntity {
 		this.onClick = onClick;
 		this.text = text;
 		this.borderColour = "white";
+		this.borderWidth = 2;
 		this.fontSize = 56;
 		this.setFontSize(this.fontSize);
 		this.disabled = (disabled === undefined) ? false : disabled;
@@ -29,10 +30,10 @@ export default class Button extends SpriteEntity {
 	}
 
 	draw() {
-		let lw = 2;
+		let lw = this.borderWidth;
 
 		if (collision.pointInRectangle(this.g.input.getX(), this.g.input.getY(), this.x, this.y, this.x+this.width, this.y+this.height)) {
-			lw = 8;
+			lw = this.borderWidth + 6;
 		}
 
 
