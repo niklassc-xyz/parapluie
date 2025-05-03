@@ -15,7 +15,7 @@ export default class PhysicalEntity extends DimensionEntity {
 		// the room:
 		// 0: off, 1: horizontal, vertical, both
 		// TODO camelCase, remove prefix
-		this.opt_swapScreen = 0;
+		this.swapScreen = 0;
 	}
 
 	setDirection(direction) {
@@ -57,7 +57,7 @@ export default class PhysicalEntity extends DimensionEntity {
 	step() {
 		this.x += this.hspeed;
 		this.y += this.vspeed;
-		if(this.opt_swapScreen !== 0) {
+		if(this.swapScreen !== 0) {
 			this.swapScreen();
 		}
 	}
@@ -65,11 +65,11 @@ export default class PhysicalEntity extends DimensionEntity {
 	// TODO comment
 	// TODO test → canvas_width was replaced with roomWidth, also height
 	swapScreen() {
-		if(this.opt_swapScreen >= 2) {
+		if(this.swapScreen >= 2) {
 			if(this.y > g.roomHeight + (this.height/2)) this.y = -(this.height/2);
 			if((this.height/2) + this.y < 0) this.y = g.roomHeight + (this.height/2);
 		}
-		if(this.opt_swapScreen === 2) return;
+		if(this.swapScreen === 2) return;
 		if(this.x > g.roomWidth + (this.width/2)) this.x = -(this.width/2);
 		if((this.width/2) + this.x < 0) this.x = g.roomWidth + (this.width/2);
 	}
