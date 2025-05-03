@@ -16,18 +16,19 @@ export default class PhysicalEntity extends GameEntity {
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom_vert() {
+	// TODO remove or rename
+	isOutsideRoomVert() {
 		return (this.x > this.g.roomWidth) || (this.width + this.x < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom_horz() {
+	isOutsideRoomHorz() {
 		return (this.y > this.g.roomHeight) || (this.height + this.y < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom() {
-		return this.isOutsideRoom_vert() || this.isOutsideRoom_horz();
+		return this.isOutsideRoomVert() || this.isOutsideRoomHorz();
 	}
 
 	// For Debugging, draws border around object
