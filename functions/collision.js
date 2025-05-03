@@ -1,21 +1,24 @@
+// TODO to (static) class
+
 export function pointInRectangle(px, py, x1, y1, x2, y2) {
 	if (px < x1 || py < y1 || px > x2 || py > y2)
 		return false;
 	return true;
 }
-export function rectangleInRectangle(a_x1, a_y1, a_x2, a_y2, b_x1, b_y1, b_x2, b_y2) {
-	if (a_x1 <= b_x1) {
-		if(a_x2 < b_x1)
+// TODO camelCase
+export function rectangleInRectangle(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2) {
+	if (ax1 <= bx1) {
+		if(ax2 < bx1)
 			return false;
 	} else {
-		if (b_x2 < a_x1)
+		if (bx2 < ax1)
 			return false;
 	}
-	if (a_y1 <= b_y1) {
-		if (a_y2 >= b_y1)
+	if (ay1 <= by1) {
+		if (ay2 >= by1)
 			return true;
 	} else {
-		if(b_y2 >= a_y1)
+		if(by2 >= ay1)
 			return true;
 	}
 	return false;
