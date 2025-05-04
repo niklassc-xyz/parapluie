@@ -2,6 +2,7 @@ import Input from "./Input.js";
 import Storage from "./Storage.js";
 import Painter from "./Painter.js";
 import ResourceManager from "./ResourceManager.js";
+import OverlayManager from "./OverlayManager/OverlayManager.js";
 
 
 export default class Game {
@@ -37,6 +38,7 @@ export default class Game {
 		this.input = new Input(this);
 		this.resourceManager = new ResourceManager();
 		this.storage = new Storage(storageBackend);
+		this.overlayManager = new OverlayManager();
 
 		this.entities = [];
 
@@ -131,10 +133,12 @@ export default class Game {
 		document.body.style.backgroundSize = "cover";
 	}
 
+	// Pauses game loop
 	pause() {
 		this._paused = true;
 	}
 
+	// Resumes game loop
 	unpause() {
 		this._paused = false;
 	}
