@@ -125,8 +125,6 @@ export default class OverlayManager {
 	}
 
 	closeOverlay(overlay) {
-		console.log(this._overlays);
-
 		overlay.remove();
 
 		for (let i = 0; i < this._overlays.length; i++) {
