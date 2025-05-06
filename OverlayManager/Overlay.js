@@ -1,4 +1,7 @@
 export default class Overlay {
+	// Starting z, increased whenever a overlay is opened, decreased when closed
+	static _zIndex = 100;
+
 	constructor(contentInnerHtml = "<p>Overlay</p>") {
 		this._divContainer = document.createElement("div");
 		this._divContainer.classList.add("overlay");
@@ -11,13 +14,15 @@ export default class Overlay {
 		this._divContainer.appendChild(this._divContent);
 	}
 
-	getDiv() {
-		// return this._div;
-		return this._divContainer;
+	// Adds overlay to DOM
+	add() {
+		const overlay = document.body.appendChild(this._divContainer);
+		overlay.style.zIndex = Overlay._zIndex++;
 	}
 
-	// Deletes overlay-div from document
+	// Deletes overlay-div from DOM
 	remove() {
 		this._divContainer.remove();
+		Overlay._zIndex--;
 	}
 }
