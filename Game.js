@@ -45,6 +45,8 @@ export default class Game {
 
 		this.initialRoom = initalRoom;
 		this.fps = fps;
+
+		window.alert = this.alert;
 	}
 
 	// Enters the inital room and starts the game loop
