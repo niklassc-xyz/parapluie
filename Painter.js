@@ -5,7 +5,7 @@
 import * as graphics from './functions/graphics.js';
 
 export default class Painter {
-	constructor(canvas, roomWidth, roomHeight, scaling=true) {
+	constructor(canvas, scaling=true) {
 		this.canvas = canvas; // TODO private
 		this.ctx = this.canvas.getContext("2d");
 
@@ -16,9 +16,7 @@ export default class Painter {
 		this.paddingHorz = 0;
 		this.viewWidth;
 		this.viewHeight;
-		this.scaling = scaling
-
-		this.resizeCanvas(roomWidth, roomHeight, scaling);
+		this.scaling = scaling;
 	}
 
 	resizeCanvas(roomWidth, roomHeight, scaling) {

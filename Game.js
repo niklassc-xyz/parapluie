@@ -24,8 +24,9 @@ export default class Game {
 
 		const canvas = document.createElement("canvas");
 		document.body.insertBefore(canvas, document.body.childNodes[0]);
-		this.painter = new Painter(canvas, this.roomWidth, this.roomHeight);
+		this.painter = new Painter(canvas);
 		window.addEventListener('resize', () => { this.resize(); });
+		this.resize();
 		// this.resizeTimeoutFunctionId;
 		// window.addEventListener('resize', () => {
 		// 	console.log(this.resizeTimeoutFunctionId);
