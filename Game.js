@@ -25,7 +25,7 @@ export default class Game {
 		const canvas = document.createElement("canvas");
 		document.body.insertBefore(canvas, document.body.childNodes[0]);
 		this.painter = new Painter(canvas, this.roomWidth, this.roomHeight);
-		window.addEventListener('resize', () => { this.painter.resizeCanvas(this.roomWidth, this.roomHeight) });
+		window.addEventListener('resize', () => { this.resize(); });
 		// this.resizeTimeoutFunctionId;
 		// window.addEventListener('resize', () => {
 		// 	console.log(this.resizeTimeoutFunctionId);
@@ -47,6 +47,10 @@ export default class Game {
 		this.fps = fps;
 
 		window.alert = this.alert;
+	}
+
+	resize() {
+		this.painter.resizeCanvas(this.roomWidth, this.roomHeight);
 	}
 
 	// Enters the inital room and starts the game loop
