@@ -27,20 +27,11 @@ export default class Room {
 	}
 
 	step() {
-		//do nothing
+		// do nothing
 	}
 
 	draw() {
-		if (this.g.getDebug()) {
-			this.g.painter.ctx.font = "16px fnt_Comforta_Bold";
-			this.g.painter.ctx.textAlign = "left";
-			this.g.painter.ctx.fillStyle = "white";
-			this.g.painter.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);;
-			this.g.painter.ctx.fillText("this.g.canvas. " + this.g.painter.canvas.width + ", " + this.g.painter.canvas.height, 16, 16 + 32*1);
-			this.g.painter.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16, 16 + 32*3);
-			this.g.painter.ctx.fillText(`scaling: ${this.g.scaling}`, 16, 16 + 32*4);
-			this.g.painter.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16, 16 + 32*5)
-		}
+		// do nothing
 	}
 
 	// Call destroy() on all entities in room

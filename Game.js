@@ -19,7 +19,6 @@ export default class Game {
 		this.roomHeight = 720;
 
 		this._debug = false;
-		this._scaling = true;
 		this._paused = false;
 
 		const canvas = document.createElement("canvas");
@@ -102,6 +101,18 @@ export default class Game {
 		}
 
 		this.input.draw();
+
+		if (this.getDebug()) {
+			this.painter.ctx.font = "16px fnt_Comforta_Bold";
+			this.painter.ctx.textAlign = "left";
+			this.painter.ctx.fillStyle = "white";
+			this.painter.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);;
+			this.painter.ctx.fillText("this.canvas. " + this.painter.canvas.width + ", " + this.painter.canvas.height, 16, 16 + 32*1);
+			this.painter.ctx.fillText("this.view " + this.painter.viewWidth + ", " + this.painter.viewHeight, 16, 16 + 32*2);
+			this.painter.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16, 16 + 32*3);
+			this.painter.ctx.fillText(`scaling: ${this.painter.getScaling()}`, 16, 16 + 32*4);
+			// this.painter.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16, 16 + 32*5)
+		}
 	}
 
 	addObject(obj) {
@@ -165,11 +176,11 @@ export default class Game {
 	}
 
 	setScaling(val) {
-		this._scaling = val;
+		this.painter.setScaling(val);
 	}
 
 	getScaling(val) {
-		return this._scaling;
+		return this.painter.getScaling();
 	}
 
 

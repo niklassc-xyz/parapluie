@@ -14,19 +14,29 @@ export default class Painter {
 
 		this.paddingVert = 0;
 		this.paddingHorz = 0;
+
+		// e.g. room
+		this._contentWidth;
+		this._contentHeight;
+
+		// TODO protected
+		// Content plus border if screen ratio does not match content ratio
 		this.viewWidth;
 		this.viewHeight;
-		this.scaling = scaling;
+		this._scaling = scaling;
 	}
 
-	resizeCanvas(roomWidth, roomHeight, scaling) {
+	resizeCanvas(contentWidth, contentHeight) {
+		this._contentWidth = contentWidth;
+		this._contentHeight = contentHeight;
+
 		// W/H the canvas will be displayed as
 		this.canvas.style.width = window.innerWidth;
 		this.canvas.style.height = window.innerHeight;
 
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
-		if (scaling) {
+		if (this._scaling) {
 			this.canvas.width *= window.devicePixelRatio;
 			this.canvas.height *= window.devicePixelRatio;
 		}
@@ -35,24 +45,24 @@ export default class Painter {
 		// → TODO use view dimensions instead of room
 		// let canvasRatio = canvas.style.width / canvas.style.height;
 		let windowRatio = window.innerWidth / window.innerHeight;
-		let roomRatio = roomWidth / roomHeight;
+		let roomRatio = this._contentWidth / this._contentHeight;
 
 		this.paddingVert = 0; // on each side
 		this.paddingHorz = 0; // on each side
 		if (windowRatio > roomRatio) {
-			this.viewHeight = roomHeight;
-			this.viewWidth = roomHeight * (window.innerWidth / window.innerHeight);
-			this.paddingHorz = (this.viewWidth - roomWidth) / 2;
+			this.viewHeight = contentHeight;
+			this.viewWidth = contentHeight * (window.innerWidth / window.innerHeight);
+			this.paddingHorz = (this.viewWidth - this._contentWidth) / 2;
 		} else {
-			this.viewWidth = roomWidth;
-			this.viewHeight = roomWidth * (window.innerHeight / window.innerWidth);
-			this.paddingVert = (this.viewHeight - roomHeight) / 2;
+			this.viewWidth = this._contentWidth;
+			this.viewHeight = this._contentWidth * (window.innerHeight / window.innerWidth);
+			this.paddingVert = (this.viewHeight - contentHeight) / 2;
 		}
 
 		let xScalar = window.innerWidth / this.viewWidth;
 		let yScalar = window.innerHeight / this.viewHeight;
 
-		if (scaling) {
+		if (this._scaling) {
 			xScalar *= window.devicePixelRatio;
 			yScalar *= window.devicePixelRatio;
 		}
@@ -61,6 +71,15 @@ export default class Painter {
 
 		this.ctx.scale(xScalar, yScalar);
 		this.ctx.translate(this.paddingHorz, this.paddingVert);
+	}
+
+	setScaling(val) {
+		this._scaling = val;
+		this.resizeCanvas(this._contentWidth, this._contentHeight);
+	}
+
+	getScaling() {
+		return this._scaling;
 	}
 
 	setLineWidth(width) {
@@ -73,6 +92,10 @@ export default class Painter {
 
 	setStrokeStyle(style) {
 		this.ctx.strokeStyle = style;
+	}
+
+	setTextAlign(alignment) {
+		this.ctx.textAlign = alignment;
 	}
 
 	fillText(text, x, y) {
