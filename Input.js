@@ -61,7 +61,7 @@ export default class Input {
 
 	notifyClickables(up) {
 		for (let i = 0; i < this._clickables.length; i++) {
-			let iEnt = this._clickables[i];
+			const iEnt = this._clickables[i];
 			if (collision.pointInRectangle(this._x,
 			                               this._y,
 			                               iEnt.x - iEnt.ox,
@@ -77,7 +77,13 @@ export default class Input {
 				}
 				return;
 			}
-		
+		}
+
+		// Nothing was at position where user clicked, notify of empty click
+		for (let i = 0; i < this._clickables.length; i++) {
+			const iEnt = this._clickables[i];
+			if (typeof iEnt.clickMiss === "function")
+				iEnt.clickMiss(up);
 		}
 	}
 
