@@ -27,11 +27,11 @@ export default class PhysicalEntity extends DimensionEntity {
 	}
 
 	setDirectionSpeed(direction, speed) {
-		this.direction = direction;
+		this.direction = math.mMod(direction, 360);
 		this.speed = speed;
 
 		// Calc horizontal and vertical speeds
-		let radDeg = math.degToRad(direction);
+		let radDeg = math.degToRad(this.direction);
 		this.vspeed = Math.sin(radDeg) * speed;
 		this.hspeed = Math.cos(radDeg) * speed;
 	}
@@ -48,7 +48,7 @@ export default class PhysicalEntity extends DimensionEntity {
 		this.hspeed = hspeed;
 		this.vspeed = vspeed;
 
-		this.direction = math.radToDeg(Math.atan2(this.vspeed, this.hspeed));
+		this.direction = math.mMod(math.radToDeg(Math.atan2(this.vspeed, this.hspeed)), 360);
 
 		// Calc total speed from horizontal and vertical speed
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);
