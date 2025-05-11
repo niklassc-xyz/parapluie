@@ -117,8 +117,7 @@ export default class Game {
 
 	addObject(obj) {
 		obj.parent = this;
-		var pos = this.entities.length;
-		this.entities[pos] = obj;
+		this.entities.push(obj);
 
 		return obj;
 	}

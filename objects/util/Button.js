@@ -5,7 +5,7 @@ import * as collision  from "../../functions/collision.js";
 export default class Button extends SpriteEntity {
 	constructor(g, text, x, y, width, height, onClick, disabled) {
 		const sprite = "datafiles/sprites/lock.png";
-		super(g, x, y, width, height, sprite);
+		super(g, x, y, width, height, sprite, 1000);
 		this.onClick = onClick;
 		this.text = text;
 		this.borderColour = "white";

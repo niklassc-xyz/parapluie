@@ -3,8 +3,8 @@ import * as math from "../functions/math.js";
 
 export default class PhysicalEntity extends DimensionEntity {
 	// TODO default values
-	constructor(g, x, y, width, height) {
-		super(g, x, y, width, height);
+	constructor(g, x, y, width, height, z=0) {
+		super(g, x, y, width, height, z);
 
 		this.hspeed = 0;
 		this.vspeed = 0;

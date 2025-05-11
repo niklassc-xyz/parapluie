@@ -12,8 +12,8 @@ export default class SpriteEntity extends PhysicalEntity {
 	 * @param {Height of the entity} height - Height of the entity
 	 * @param {string|OffscreenCanvas} sprite - Sprite of the entity, can be either image or path
 	 */
-	constructor(g, x, y, width, height, sprite) {
-		super(g, x, y, width, height);
+	constructor(g, x, y, width, height, sprite, z=0) {
+		super(g, x, y, width, height, z);
 
 		if (typeof sprite === "string") {
 			this.sprite = this.g.resourceManager.getSpriteByPath(sprite);

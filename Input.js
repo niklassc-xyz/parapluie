@@ -25,6 +25,7 @@ export default class Input {
 		this._clickables = [];
 	}
 
+
 	/**
 	 * Register obj as clickable. ⚠ Entities need to unregister on destruction!
 	 *
@@ -34,6 +35,7 @@ export default class Input {
 	 */
 	registerClickable(entity) {
 		this._clickables.push(entity);
+		this._clickables.sort((a, b) => b.z - a.z);
 	}
 
 	draw() {

@@ -1,15 +1,16 @@
 import GameEntity from "./GameEntity.js";
 import * as collision from "../functions/collision.js";
 
-export default class PhysicalEntity extends GameEntity {
+export default class DimensionEntity extends GameEntity {
 	// TODO default values
-	constructor(g, x, y, width=0 , height=0) {
+	constructor(g, x, y, width=0 , height=0, z=0) {
 		super(g);
 
 		this.x = x;
 		this.y = y;
 		this.ox = 0; // Origin
 		this.oy = 0;
+		this.z = z;
 
 		this.width = width;
 		this.height = height;
