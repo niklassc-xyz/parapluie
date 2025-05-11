@@ -130,6 +130,11 @@ export default class Painter {
 		graphics.strokeLine(this.ctx, x1, y1, x2, y2);
 	}
 
+	strokeCross(x, y, radius) {
+		this.strokeLine(x - radius, y - radius, x + radius, y + radius);
+		this.strokeLine(x - radius, y + radius, x + radius, y - radius);
+	}
+
 	// Circle {{{
 	/**
 	 * Draws a circle, outline and filling

@@ -43,9 +43,7 @@ export default class Input {
 		if (this.g.getDebug()) {
 			this.g.painter.ctx.strokeStyle = "red";
 			this.g.painter.ctx.lineWidth = 3;
-			const l = 8;
-			this.g.painter.strokeLine(this._x - l, this._y - l, this._x + l, this._y + l);
-			this.g.painter.strokeLine(this._x - l, this._y + l, this._x + l, this._y - l);
+			this.g.painter.strokeCross(this._x, this._y, 8);
 		}
 	}
 
