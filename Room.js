@@ -44,6 +44,7 @@ export default class Room {
 	addObject(obj) {
 		obj.parent = this;
 		this.entities.push(obj);
+		obj.onAdd();
 
 		return obj;
 	}

@@ -14,10 +14,11 @@ export default class Button extends SpriteEntity {
 		this.setFontSize(this.fontSize);
 		this.disabled = (disabled === undefined) ? false : disabled;
 		this.animationSpeed = 0.1 + Math.random() * 0.2
-
-		this.g.input.registerClickable(this);
-
 		// TODO calculate font size based on width and text
+	}
+
+	onAdd() {
+		this._registerClickable();
 	}
 
 	clickUp() {
@@ -91,6 +92,5 @@ export default class Button extends SpriteEntity {
 
 	destroy() {
 		super.destroy();
-		this.g.input.unregisterClickable(this);
 	}
 }

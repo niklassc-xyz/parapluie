@@ -15,4 +15,6 @@ export default class GameEntity {
 	destroy() {
 		this.parent.removeObject(this);
 	}
+	// Called when object is added to the game loop
+	onAdd() {}
 }

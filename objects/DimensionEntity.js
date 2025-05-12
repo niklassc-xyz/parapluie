@@ -14,6 +14,38 @@ export default class DimensionEntity extends GameEntity {
 
 		this.width = width;
 		this.height = height;
+
+
+		this._registeredClickable = false;
+	}
+
+	// Registers this entity as clickable, on destruction it will automatically
+	// be unregistered
+	_registerClickable() {
+		if (this._registeredClickable) {
+			console.warn("Attempted to register as clickable even though entity was already registered.");
+			return;
+		}
+
+		this.g.input.registerClickable(this);
+		this._registeredClickable = true;
+	}
+
+	_unregisterClickable() {
+		if (!this._registeredClickable) {
+			console.warn("Attempted to unregister as clickable even though entity was not registered.");
+			return;
+		}
+
+		this._registeredClickable = !this.g.input.unregisterClickable(this);
+		return this._registeredClickable;
+	}
+
+	destroy() {
+		super.destroy();
+
+		if (this._registeredClickable)
+			this._unregisterClickable();
 	}
 
 	// TODO obolsete (ORIGIN)
