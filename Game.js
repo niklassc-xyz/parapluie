@@ -21,6 +21,9 @@ export default class Game {
 		this._debug = false;
 		this._paused = false;
 
+		this._debugFpsTimeStamp;
+		this.debugCurrentFps;
+
 		const canvas = document.createElement("canvas");
 		document.body.insertBefore(canvas, document.body.childNodes[0]);
 		this.painter = new Painter(canvas);
@@ -103,15 +106,25 @@ export default class Game {
 		this.input.draw();
 
 		if (this.getDebug()) {
+			if (this.stepCount % this.fps === 0) {
+				const secondsPassed = (Date.now() - this._debugFpsTimeStamp) / 1000;
+				this._debugFpsTimeStamp = Date.now();
+
+				this.debugCurrentFps = this.fps / secondsPassed;
+			}
+
 			this.painter.ctx.font = "16px fnt_Comforta_Bold";
 			this.painter.ctx.textAlign = "left";
 			this.painter.ctx.fillStyle = "white";
-			this.painter.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);;
+			this.painter.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16, 16 + 32*0);
 			this.painter.ctx.fillText("this.canvas. " + this.painter.canvas.width + ", " + this.painter.canvas.height, 16, 16 + 32*1);
 			this.painter.ctx.fillText("this.view " + this.painter.viewWidth + ", " + this.painter.viewHeight, 16, 16 + 32*2);
 			this.painter.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16, 16 + 32*3);
 			this.painter.ctx.fillText(`scaling: ${this.painter.getScaling()}`, 16, 16 + 32*4);
 			// this.painter.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16, 16 + 32*5)
+
+			this.painter.ctx.textAlign = "right";
+			this.painter.ctx.fillText(`FPS: ${Math.round(this.debugCurrentFps)}`, this.roomWidth - 16, 16 + 32*0);
 		}
 	}
 
@@ -169,6 +182,8 @@ export default class Game {
 
 	setDebug(val) {
 		this._debug = val;
+		this._debugFpsTimeStamp = Date.now();
+		this.debugCurrentFps = "-";
 	}
 
 	getDebug(val) {
