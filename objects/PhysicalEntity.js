@@ -84,4 +84,29 @@ export default class PhysicalEntity extends DimensionEntity {
 			this.setDirectionSpeed(dir, v);
 		}
 	}
+
+	/**
+	 * Turns toward (x|y) by max. `turnSpeed` degree. If `turnSpeed` is not set
+	 * this will point towards (x|y).
+	 */
+	turnTowardsPoint(x, y, turnSpeed=undefined) {
+		let dirToTarget = math.pointDirection(this.x, this.y, x, y);
+
+		if (typeof turnSpeed === "undefined") {
+			this.setDirection(dirToTarget);
+			return;
+		}
+
+		let positiveTurnDistance = math.mMod(dirToTarget - this.direction, 360); // clockwise
+		let negativeTurnDistance = math.mMod(this.direction - dirToTarget, 360); // anticlockwise
+		if (positiveTurnDistance <= turnSpeed || negativeTurnDistance <= turnSpeed) {
+			this.setDirection(dirToTarget);
+		} else {
+			if (positiveTurnDistance < negativeTurnDistance) {
+				this.setDirection(this.direction + turnSpeed);
+			} else {
+				this.setDirection(this.direction - turnSpeed);
+			}
+		}
+	}
 }

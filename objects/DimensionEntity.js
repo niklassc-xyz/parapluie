@@ -48,18 +48,18 @@ export default class DimensionEntity extends GameEntity {
 			this._unregisterClickable();
 	}
 
-	// TODO obolsete (ORIGIN)
+	// TODO use origin
 	// TODO remove or rename
 	isOutsideRoomVert() {
 		return (this.x > this.g.roomWidth) || (this.width + this.x < 0);
 	}
 
-	// TODO obolsete (ORIGIN)
+	// TODO use origin
 	isOutsideRoomHorz() {
 		return (this.y > this.g.roomHeight) || (this.height + this.y < 0);
 	}
 
-	// TODO obolsete (ORIGIN)
+	// TODO use origin
 	isOutsideRoom() {
 		return this.isOutsideRoomVert() || this.isOutsideRoomHorz();
 	}
