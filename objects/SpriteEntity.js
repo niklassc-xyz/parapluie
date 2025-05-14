@@ -26,6 +26,7 @@ export default class SpriteEntity extends PhysicalEntity {
 	draw() {
 		super.draw();
 		
+		// TODO use painter
 		// Draw sprite
 		if (this.direction !== 0) {
 			// Rotate before drawing

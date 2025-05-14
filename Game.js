@@ -54,11 +54,14 @@ export default class Game {
 
 	resize() {
 		this.painter.resizeCanvas(this.roomWidth, this.roomHeight);
+
+		if (typeof this.room !== "undefined")
+			this.setBackground(this.room.background);
 	}
 
 	// Enters the inital room and starts the game loop
 	start() {
-		this.room = new this.initialRoom(this);
+		this.gotoRoom(this.initialRoom);
 		setInterval(() => this.step(), 1000/this.fps);
 	}
 
@@ -154,15 +157,25 @@ export default class Game {
 	gotoRoom(newRoom, returnRoom=undefined) {
 		console.log(`Going to room ${newRoom.name}`);
 
-		this.room.destroyEntities();
+		if (typeof this.room !== "undefined")
+			this.room.destroyEntities();
 
 		this.input.reset();
 
 		// Set new room
 		this.room = new newRoom(this, returnRoom);
 
-		document.body.style.background = `url(${newRoom.background})`;
+		this.setBackground(this.room.background);
+	}
+
+	setBackground(background) {
+		// TODO scale to room → to room or width?
+
+		document.body.style.background = `url(${background})`;
 		document.body.style.backgroundSize = "cover";
+		const canvasOrigin = this.painter.canvasToScreen(this.painter.paddingHorz, this.painter.paddingVert);
+		// document.body.style.backgroundPosition = `top ${canvasOrigin.y}px left ${canvasOrigin.x}px`;
+		document.body.style.backgroundPosition = `top ${canvasOrigin.y}px left 0px`;
 	}
 
 	// Pauses game loop

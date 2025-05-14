@@ -1,13 +1,14 @@
 // Abstract Class
 
 export default class Room {
-	static background = "datafiles/backgrounds/background2-g1.png";
 
 	constructor(g, returnRoom=undefined) {
 		if (this.constructor == Room) {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
 
+		// TODO
+		this.background = "datafiles/backgrounds/background2-g1.png";
 		this.g = g;
 
 		if (returnRoom === undefined) {
@@ -32,6 +33,12 @@ export default class Room {
 
 	draw() {
 		// do nothing
+
+		if (this.g.getDebug()) {
+			this.g.painter.setLineWidth(1);
+			this.g.painter.setStrokeStyle("red");
+			this.g.painter.strokeRect(0, 0, this.g.roomWidth, this.g.roomHeight);
+		}
 	}
 
 	// Call destroy() on all entities in room

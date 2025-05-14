@@ -12,8 +12,12 @@ export default class Painter {
 		this.strokeStyle = "white";
 		this.fillStyle = "black";
 
+		// Padding on each side (centered), in internal coordinates
 		this.paddingVert = 0;
 		this.paddingHorz = 0;
+
+		this.xScalar = 1;
+		this.yScalar = 1;
 
 		// e.g. room
 		this._contentWidth;
@@ -24,6 +28,12 @@ export default class Painter {
 		this.viewWidth;
 		this.viewHeight;
 		this._scaling = scaling;
+	}
+
+	canvasToScreen(x, y) {
+		const sx = x * this.xScalar;
+		const sy = y * this.yScalar
+		return {"x": sx, "y": sy};
 	}
 
 	resizeCanvas(contentWidth, contentHeight) {
@@ -59,17 +69,18 @@ export default class Painter {
 			this.paddingVert = (this.viewHeight - contentHeight) / 2;
 		}
 
-		let xScalar = window.innerWidth / this.viewWidth;
-		let yScalar = window.innerHeight / this.viewHeight;
+		this.xScalar = window.innerWidth / this.viewWidth;
+		this.yScalar = window.innerHeight / this.viewHeight;
 
 		if (this._scaling) {
-			xScalar *= window.devicePixelRatio;
-			yScalar *= window.devicePixelRatio;
+			this.xScalar *= window.devicePixelRatio;
+			this.yScalar *= window.devicePixelRatio;
 		}
 
-		console.log("scalars", xScalar, yScalar);
+		console.log("scalars", this.xScalar, this.yScalar);
+		console.log("padding", this.paddingHorz, this.paddingVert);
 
-		this.ctx.scale(xScalar, yScalar);
+		this.ctx.scale(this.xScalar, this.yScalar);
 		this.ctx.translate(this.paddingHorz, this.paddingVert);
 	}
 
@@ -114,6 +125,14 @@ export default class Painter {
 		this.ctx.font = font;
 	}
 
+	// TODO support s-prefix variables https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+	drawImage(image, dx, dy, dWidth=undefined, dHeight=undefined) {
+		this.ctx.drawImage(image, dx, dy, dWidth, dHeight);
+	}
+
+
+	// Rect {{{
+
 	clearRect(x, y, width, height) {
 		this.ctx.clearRect(x, y, width, height);
 	}
@@ -126,14 +145,12 @@ export default class Painter {
 		this.ctx.strokeRect(x, y, width, height);
 	}
 
+	// }}}
+
 	strokeLine(x1, y1, x2, y2) {
 		graphics.strokeLine(this.ctx, x1, y1, x2, y2);
 	}
 
-	strokeCross(x, y, radius) {
-		this.strokeLine(x - radius, y - radius, x + radius, y + radius);
-		this.strokeLine(x - radius, y + radius, x + radius, y - radius);
-	}
 
 	// Circle {{{
 	/**
@@ -212,4 +229,12 @@ export default class Painter {
 	}
 	// }}}
 
+	// Misc {{{
+
+	strokeCross(x, y, radius) {
+		this.strokeLine(x - radius, y - radius, x + radius, y + radius);
+		this.strokeLine(x - radius, y + radius, x + radius, y - radius);
+	}
+
+	// }}}
 }
