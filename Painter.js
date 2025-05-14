@@ -77,9 +77,6 @@ export default class Painter {
 			this.yScalar *= window.devicePixelRatio;
 		}
 
-		console.log("scalars", this.xScalar, this.yScalar);
-		console.log("padding", this.paddingHorz, this.paddingVert);
-
 		this.ctx.scale(this.xScalar, this.yScalar);
 		this.ctx.translate(this.paddingHorz, this.paddingVert);
 	}
