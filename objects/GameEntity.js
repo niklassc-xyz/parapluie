@@ -9,11 +9,17 @@ export default class GameEntity {
 	constructor(g) {
 		this.g = g;
 		this.parent = null; // Stores object that will call step, draw, destroy (usually the room)
+		this.destroyed = false;
 	}
 	step() {}
 	draw() {}
+
+	/**
+	 * Destroys this entity and removes it from the game loop.
+	 */
 	destroy() {
-		this.parent.removeObject(this);
+		this.destroyed = true;
+		this.parent.removeObject(this); // TODO lazy removal in step loop?
 	}
 	// Called when object is added to the game loop
 	onAdd() {}
