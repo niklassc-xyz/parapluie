@@ -189,40 +189,39 @@ export default class Painter {
 	/**
 	* Draws a roundrect, outline and filling
 	*
-	* @param {number} x1 - lowest x coordinate of roundrect
-	* @param {number} y1 - lowest y coordinate of roundrect
-	* @param {number} x2 - highest x coordinate of roundrect
-	* @param {number} y2 - highest y coordinate of roundrect
+	* @param {number} x - lowest x coordinate of roundrect
+	* @param {number} y - lowest y coordinate of roundrect
+	* @param {number} width - width of roundrect
+	* @param {number} height - height of roundrect
 	* @param {number} radius - Radius
 	*/
-	drawRoundrect(x1, y1, x2, y2, radius) {
-		graphics.drawRoundrect(this.ctx, x1, y1, x2, y2, radius);
+	drawRoundrect(x, y, width, height, radius) {
+		graphics.drawRoundrect(this.ctx, x, y, width, height, radius);
 	}
 
 	/**
 	* Draws a roundrect that is filled
-	*
-	* @param {number} x1 - lowest x coordinate of roundrect
-	* @param {number} y1 - lowest y coordinate of roundrect
-	* @param {number} x2 - highest x coordinate of roundrect
-	* @param {number} y2 - highest y coordinate of roundrect
+	* @param {number} x - lowest x coordinate of roundrect
+	* @param {number} y - lowest y coordinate of roundrect
+	* @param {number} width - width of roundrect
+	* @param {number} height - height of roundrect
 	* @param {number} radius - Radius
 	*/
-	fillRoundrect(x1, y1, x2, y2, radius) {
-		graphics.fillRoundrect(this.ctx, x1, y1, x2, y2, radius);
+	fillRoundrect(x, y, width, height, radius) {
+		graphics.fillRoundrect(this.ctx, x, y, width, height, radius);
 	}
 
 	/**
 	* Draws a roundrect that is stroked (outlined)
 	*
-	* @param {number} x1 - lowest x coordinate of roundrect
-	* @param {number} y1 - lowest y coordinate of roundrect
-	* @param {number} x2 - highest x coordinate of roundrect
-	* @param {number} y2 - highest y coordinate of roundrect
+	* @param {number} x - lowest x coordinate of roundrect
+	* @param {number} y - lowest y coordinate of roundrect
+	* @param {number} width - width of roundrect
+	* @param {number} height - height of roundrect
 	* @param {number} radius - Radius
 	*/
-	strokeRoundrect(x1, y1, x2, y2, radius) {
-		graphics.strokeRoundrect(this.ctx, x1, y1, x2, y2, radius);
+	strokeRoundrect(x, y, width, height, radius) {
+		graphics.strokeRoundrect(this.ctx, x, y, width, height, radius);
 	}
 	// }}}
 

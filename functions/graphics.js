@@ -120,15 +120,15 @@ function renderCircle(ctx, x, y, r, fill, stroke) {
  * Draws a roundrect
  *
  * @param {CanvasRenderingContext2D} ctx - Rendering context to draw on
- * @param {number} x1 - lowest x coordinate of roundrect
- * @param {number} y1 - lowest y coordinate of roundrect
- * @param {number} x2 - highest x coordinate of roundrect
- * @param {number} y2 - highest y coordinate of roundrect
+ * @param {number} x - lowest x coordinate of roundrect
+ * @param {number} y - lowest y coordinate of roundrect
+ * @param {number} width - width of roundrect
+ * @param {number} height - height of roundrect
  * @param {number} radius - Radius
  * @param {boolean} fill - Whether to fill the roundrect
  * @param {boolean} stroke - Whether to outline the roundrect
  */
-function renderRoundrect(ctx, x1, y1, x2, y2, radius=5, fill=true, stroke=true) {
+function renderRoundrect(ctx, x, y, width, height, radius=5, fill=true, stroke=true) {
 	// TODO implement setting individual corner radius
 	if (typeof radius === 'number') {
 		radius = {tl: radius, tr: radius, br: radius, bl: radius};
@@ -138,6 +138,11 @@ function renderRoundrect(ctx, x1, y1, x2, y2, radius=5, fill=true, stroke=true) 
 			radius[side] = radius[side] || defaultRadius[side];
 		}
 	}
+
+	const x1 = x;
+	const y1 = y;
+	const x2 = x + width;
+	const y2 = y + height;
 
 	ctx.beginPath();
 	ctx.moveTo(x1 + radius.tl, y1);
