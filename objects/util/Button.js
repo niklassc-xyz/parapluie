@@ -53,8 +53,8 @@ export default class Button extends SpriteEntity {
 		this.g.painter.strokeRoundrect(
 			this.x,
 			this.y,
-			this.x + this.width + lw,
-			this.y + this.height + lw,
+			this.width + lw,
+			this.height + lw,
 			6
 		);
 
@@ -64,8 +64,8 @@ export default class Button extends SpriteEntity {
 		this.g.painter.drawRoundrect(
 			this.x,
 			this.y,
-			this.x + this.width,
-			this.y + this.height,
+			this.width,
+			this.height,
 			6
 		);
 
