@@ -230,6 +230,7 @@ export default class Game {
 			.overlayContent {
 				height: 100%;
 				width: fit-content;
+				max-width: 90%;
 				margin: 0 auto;
 
 				overflow-x: hidden;
